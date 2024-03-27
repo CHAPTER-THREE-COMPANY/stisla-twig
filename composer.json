@@ -14,7 +14,12 @@
             "email": "masao.ikawa@chapter-three.jp"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=8.2",
+        "symfony/config": "^6.4|^7.0",
+        "symfony/framework-bundle": "^6.4|^7.0",
+        "twig/twig": "^3.8"
+    },
     "autoload": {
         "psr-4": {
             "ChapterThree\\Stisla\\": "src/"
@@ -26,5 +31,5 @@
             "0.0.x-dev": "v0.0-dev"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
