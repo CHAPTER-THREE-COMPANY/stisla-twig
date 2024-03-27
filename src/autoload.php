@@ -1,9 +1,11 @@
 <?php
 
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+require_once '../vendor/autoload.php';
 
-return static function (ContainerConfigurator $container) {
-    $container->extension("twig", [
-        "'paths.'%kernel.project_dir%/vendor/chapter-three-company/stisla-twig/Resources/templates''" => 'c3'
-    ]);
+
+return static function (TwigConfig $twig) {
+    // ...
+
+    $twig->path('email/default/templates', null);
+    $twig->path('backend/templates', 'admin');
 };
