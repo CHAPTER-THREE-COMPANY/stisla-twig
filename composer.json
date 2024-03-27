@@ -1,18 +1,24 @@
 {
     "name": "chapter-three-company/stisla-twig",
     "description": "stisla for tiwg",
-    "type": "library",
+    "keywords": [
+        "symfony",
+        "twig",
+        "stisla"
+    ],
+    "homepage": "https://github.com/CHAPTER-THREE-COMPANY/stisla-twig",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "ChapterThree\\Stisla\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "MASAO IKAWA",
             "email": "masao.ikawa@chapter-three.jp"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ChapterThree\\Stisla\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
 }
