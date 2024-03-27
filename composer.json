@@ -20,5 +20,11 @@
             "ChapterThree\\Stisla\\": "src/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "v0.1-dev",
+            "0.0.x-dev": "v0.0-dev"
+        }
+    },
     "minimum-stability": "dev"
 }
