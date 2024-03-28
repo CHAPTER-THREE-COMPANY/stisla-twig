@@ -23,7 +23,8 @@
     "autoload": {
         "psr-4": {
             "ChapterThree\\Stisla\\": "src/"
-        }
+        },
+        "files": ["src/autoload.php"]
     },
     "extra": {
         "branch-alias": {
