@@ -1,7 +1,6 @@
 <?php
 
-require_once '../vendor/autoload.php';
-
+use Symfony\Config\TwigConfig;
 
 return static function (TwigConfig $twig) {
     // ...
