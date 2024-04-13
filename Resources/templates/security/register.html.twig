@@ -1,0 +1,72 @@
+{% set title = 'メンバー登録' %}
+{% set page = 'auth-register.html' %}
+{% set body = false %}
+{% extends 'base.html.twig' %}
+
+{% block plugins_css %}
+    <!--link rel="stylesheet" href="../node_modules/selectric/public/selectric.css"-->
+{% endblock %}
+
+{% block content %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="login-brand">
+                        <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
+                    </div>
+
+                    {{ form_errors(registrationForm) }}
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <div class="card-title"><h4>メンバー登録</h4></div>
+                            <div class="card-subtitle"><small>メンバー登録が行えます</small></div>
+                        </div>
+
+                        <div class="card-body">
+                            {{ form_start(registrationForm) }}
+                                <div class="form-group">
+                                    {{ form_row(registrationForm.email, { label: 'メールアドレス'}) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_row(registrationForm.plainPassword, {
+                                        label: 'パスワード'
+                                    }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_row(registrationForm.agreeTerms, { label: 'サイトルールに同意する' }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        登録用確認メール送信
+                                    </button>
+                                </div>
+
+                            {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; Stisla 2018
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block plugins_js %}
+    <!--script src="../node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+    <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script-->
+{% endblock %}
+
+{% block page_js %}
+    <!--script src="../assets/js/page/auth-register.js"></script-->
+{% endblock %}
