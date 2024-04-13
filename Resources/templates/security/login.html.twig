@@ -1,0 +1,89 @@
+{% set title = 'Login' %}
+{% set page = 'auth-login.html' %}
+{% set body = false %}
+{% extends 'base.html.twig' %}
+
+{% block plugins_css %}
+  <!--link rel="stylesheet" href="{#{ asset('node_modules/bootstrap-social/bootstrap-social.css') }#}"-->
+{% endblock %}
+
+{% block content %}
+  <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+              <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
+            </div>
+
+            {% if error %}
+              <div class="card-header-action">
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+              </div>
+            {% endif %}
+
+            {{ include('default/flashbags.html.twig') }}
+
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4>ログイン</h4>
+              </div>
+
+              <div class="card-body">
+                <form method="POST" action="#" class="needs-validation" novalidate="">
+                  <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input id="email" type="email" value="{{ last_username }}" class="form-control" name="_username" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      Please fill in your email
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="password" class="control-label">パスワード</label>
+                      <div class="float-right">
+                        <a href="{{ path('app_forgot_password_request') }}" class="text-small">
+                          パスワードをお忘れですか?
+                        </a>
+                      </div>
+                    </div>
+                    <input id="password" type="password" class="form-control" name="_password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      please fill in your password
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="_remember_me" class="custom-control-input" tabindex="3" id="remember_me" checked>
+                      <label class="custom-control-label" for="remember_me">Remember Me</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                      ログイン
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+            <div class="mt-5 text-muted text-center">
+              アカウント登録はこちら <a href="{{path('app_register')}}">新規登録</a>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; Stisla 2018
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
