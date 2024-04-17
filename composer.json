@@ -29,9 +29,8 @@
     },
     "autoload": {
         "psr-4": {
-            "ChapterThree\\Stisla\\": "src/"
-        },
-        "files": ["src/autoload.php"]
+            "ChapterThree\\Stisla\\": "src"
+        }
     },
     "extra": {
         "branch-alias": {
@@ -55,7 +54,10 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-package-install": [
-
+            "ChapterThree\\Stisla::info"
+        ],
+        "ikawa": [
+            "ChapterThree\\Stisla::info"
         ]
     }
 }

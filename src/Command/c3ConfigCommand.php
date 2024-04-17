@@ -1,7 +1,8 @@
 <?php
 
-namespace ChapterThree\Stisla\Command;
+namespace App\Command;
 
+use ChapterThree\Stisla\Stisla;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -32,6 +33,12 @@ class c3ConfigCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        $io->ask("pause");
+        Stisla::info();
+        $io->ask("start");
+
+
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {
