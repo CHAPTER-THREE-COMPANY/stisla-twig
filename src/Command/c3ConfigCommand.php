@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Command;
+namespace ChapterThree\Stisla\Command;
 
 use ChapterThree\Stisla\Stisla;
 use Symfony\Component\Console\Attribute\AsCommand;
