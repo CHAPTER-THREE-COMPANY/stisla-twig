@@ -59,6 +59,12 @@
         "post-package-update": [
             "ChapterThree\\Stisla\\C3Stisla::info"
         ],
+        "post-install-cmd": [
+            "ChapterThree\\Stisla\\C3Stisla::info"
+        ],
+        "post-update-cmd": [
+            "ChapterThree\\Stisla\\C3Stisla::info"
+        ],
         "ikawa": [
             "ChapterThree\\Stisla\\C3Stisla::info"
         ]
