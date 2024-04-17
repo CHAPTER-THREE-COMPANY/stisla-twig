@@ -29,7 +29,8 @@
     },
     "autoload": {
         "psr-4": {
-            "ChapterThree\\Stisla\\": "src"
+            "ChapterThree\\Stisla\\": "src",
+            "App\\Command\\": "src/Command"
         }
     },
     "extra": {
