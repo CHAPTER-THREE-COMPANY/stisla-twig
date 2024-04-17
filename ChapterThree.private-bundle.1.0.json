@@ -1,9 +1,9 @@
 {
   "manifests": {
-    "acme/private-bundle": {
+    "ChapterThree/private-bundle": {
       "manifest": {
         "copy-from-recipe": {
-          "config/": "%CONFIG_DIR%"
+          "Resources/config/": "%CONFIG_DIR%"
         }
       },
       "files": {
@@ -16,7 +16,7 @@
           "executable": false
         }
       },
-      "ref": "7405f3af1312d1f9121afed4dddef636c6c7ff00"
+      "ref": "7405f3af1312d1f9121afed2dddef636c6c7ff00"
     }
   }
 }
