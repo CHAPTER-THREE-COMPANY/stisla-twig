@@ -44,6 +44,7 @@
             ]
         }
     },
+    "bin": ["bin/c3_info"],
     "minimum-stability": "stable",
     "require-dev": {
         "symfony/maker-bundle": "^1.57"
