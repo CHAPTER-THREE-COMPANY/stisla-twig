@@ -1,0 +1,14 @@
+{
+  "recipes": {
+    "ChapterThree/private-bundle": [
+      "1.0"
+    ]
+  },
+  "branch": "0.0",
+  "is_contrib": true,
+  "_links": {
+    "repository": "github.com/CHAPTER-THREE-COMPANY/stisla-twig",
+    "origin_template": "ChapterThree.private-bundle:1.0@github.com/CHAPTER-THREE-COMPANY/stisla-twig:0.0",
+    "recipe_template": "https://api.github.com/repos/CHAPTER-THREE-COMPANY/stisla-twig/contents/ChapterThree.private-bundle.1.0.json"
+  }
+}
