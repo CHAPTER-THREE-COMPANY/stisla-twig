@@ -36,6 +36,12 @@
         "branch-alias": {
             "dev-main": "v0.1-dev",
             "0.0.x-dev": "v0.0-dev"
+        },
+        "symfony": {
+            "endpoint": [
+                "https://api.github.com/repos/CHAPTER-THREE-COMPANY/stisla-twig/contents/index.json",
+                "flex://defaults"
+            ]
         }
     },
     "minimum-stability": "stable",
