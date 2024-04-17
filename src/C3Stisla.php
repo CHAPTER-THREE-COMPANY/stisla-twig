@@ -2,7 +2,7 @@
 
 namespace ChapterThree\Stisla;
 
-class Stisla
+class C3Stisla
 {
     public static function info(): void
     {

@@ -2,7 +2,7 @@
 
 namespace ChapterThree\Stisla\Command;
 
-use ChapterThree\Stisla\Stisla;
+use ChapterThree\Stisla\C3Stisla;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

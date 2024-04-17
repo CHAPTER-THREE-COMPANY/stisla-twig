@@ -54,10 +54,10 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-package-install": [
-            "ChapterThree\\Stisla::info"
+            "ChapterThree\\Stisla\\C3Stisla::info"
         ],
         "ikawa": [
-            "ChapterThree\\Stisla::info"
+            "ChapterThree\\Stisla\\C3Stisla::info"
         ]
     }
 }
