@@ -21,7 +21,7 @@ class C3HelloExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../../Resources/config')
         );
-        $loader->load('services.xml');
+        $loader->load('services.yml');
 
 /*        $container->addCompilerPass()->addAnnotatedClassesToCompile([
             // you can define the fully qualified class names...
