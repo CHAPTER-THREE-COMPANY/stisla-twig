@@ -1,0 +1,73 @@
+{% set title = 'プロフィール' %}
+{% set page = 'profile.html' %}
+{% extends 'base.html.twig' %}
+{% set body = true %}
+
+{% block plugins_css %}
+  <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css">
+{% endblock %}
+
+{% block section_body %}
+  <h2 class="section-title">ようこそ、{{ app.user.fullname|default(app.user.email)|default('(未登録ユーザー)') }}</i> さん</h2>
+  <p class="section-lead">
+    あなたの情報をこちらで編集してください。
+  </p>
+
+  <div class="row mt-sm-12">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="card">
+        <form method="post" class="needs-validation" novalidate="">
+          {{ form_start(form) }}
+          <div class="card-header">
+            <h4>プロフィール編集</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="form-group col">
+                {{ form_row(form) }}
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <div class="form-group col">
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </div>
+          {{ form_end(form) }}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block plugins_js %}
+  <script src="node_modules/summernote/dist/summernote-bs4.js"></script>
+
+  <script>
+    $(function(){
+      // Ajax button click
+      $('#syain_cd').on('blur',function(){
+        $.ajax({
+          url:'https://customer.izawa.jp/shift/employee/'+$('#syain_cd').val(),
+          dataType:'jsonp',
+          jsonp: 'callback',
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( (data) => {
+          $('.result').html(data['社員氏名']);
+          //console.log(data);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+          $('.result').html(data);
+          console.log(data);
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always( (data) => {
+          //alert('ok');
+        });
+      });
+    });
+  </script>
+{% endblock %}

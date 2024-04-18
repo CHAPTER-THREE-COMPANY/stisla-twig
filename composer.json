@@ -1,6 +1,7 @@
 {
     "name": "chapter-three-company/stisla-twig",
-    "description": "stisla for tiwg",
+    "description": "stisla for tiwg. ...",
+    "type": "symfony-bundle",
     "keywords": [
         "symfony",
         "twig",
@@ -14,11 +15,55 @@
             "email": "masao.ikawa@chapter-three.jp"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=8.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "symfony/config": "^7.0",
+        "symfony/console": "7.0.*",
+        "symfony/dotenv": "7.0.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "7.0.*",
+        "symfony/runtime": "7.0.*",
+        "symfony/yaml": "7.0.*",
+        "twig/twig": "^3.8",
+        "symfony/twig-bundle": "7.0.*"
+    },
     "autoload": {
         "psr-4": {
-            "ChapterThree\\Stisla\\": "src/"
+            "ChapterThree\\StislaTwigBundle\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.0.x-dev",
+            "0.0.x-dev": "0.0.x-dev"
+        },
+        "1symfony": {
+            "endpoint1": [
+                "https://api.github.com/repos/CHAPTER-THREE-COMPANY/symfony-recipes/contents/index.json",
+                "flex://defaults"
+            ]
+        }
+    },
+    "bin": ["bin/c3_info"],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "symfony/maker-bundle": "^1.57"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "ikawa": [
+            "ChapterThree\\StislaTwigBundle\\C3Stisla::info"
+        ]
+    }
 }

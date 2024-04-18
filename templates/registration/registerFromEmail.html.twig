@@ -1,0 +1,172 @@
+{% set title = 'Register' %}
+{% set page = 'auth-register.html' %}
+{% set body = false %}
+{% extends 'base.html.twig' %}
+
+{% block plugins_css %}
+  <link rel="stylesheet" href="../node_modules/selectric/public/selectric.css">
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+              <div class="login-brand">
+                  {{ menu_long }}
+              </div>
+
+              {% for label, messages in app.session.flashBag.all %}
+                  {% for message in messages %}
+                      <div class="alert alert-{{label}} alert-dismissible alert-has-icon show fade">
+                          <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                          <div class="alert-body">
+                              <button class="close" data-dismiss="alert">
+                                  <span>×</span>
+                              </button>
+                              {{ message }}
+                          </div>
+                      </div>
+                  {% endfor %}
+              {% endfor %}
+
+              <div class="card card-primary">
+              <div class="card-header">
+                  <h4>ユーザー情報更新</h4>
+              </div>
+
+              <div class="card-body">
+                {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.fullname, {'id': 'nickname'}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, {id: 'username'}) }}
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-6">
+                      <!--label for="password" class="d-block">Password</label>
+                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password"-->
+                      {{ form_row(registrationForm.password) }}
+                      <div id="pwindicator" class="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                      </div>
+                    </div>
+                </div>
+
+                <!--div class="form-divider">
+                Your Home
+                </div>
+                <div class="row">
+                <div class="form-group col-6">
+                  <label>都道府県</label>
+                  <select class="form-control selectric">
+                    <option>都道府県</option>
+                    <option>埼玉県</option>
+                    <option>千葉県</option>
+                    <option>東京都</option>
+                    <option>神奈川県</option>
+                    <option>北海道</option>
+                    <option>青森県</option>
+                    <option>岩手県</option>
+                    <option>宮城県</option>
+                    <option>秋田県</option>
+                    <option>山形県</option>
+                    <option>福島県</option>
+                    <option>茨城県</option>
+                    <option>栃木県</option>
+                    <option>群馬県</option>
+                    <option>新潟県</option>
+                    <option>富山県</option>
+                    <option>石川県</option>
+                    <option>福井県</option>
+                    <option>山梨県</option>
+                    <option>長野県</option>
+                    <option>岐阜県</option>
+                    <option>静岡県</option>
+                    <option>愛知県</option>
+                    <option>三重県</option>
+                    <option>滋賀県</option>
+                    <option>京都府</option>
+                    <option>大阪府</option>
+                    <option>兵庫県</option>
+                    <option>奈良県</option>
+                    <option>和歌山県</option>
+                    <option>鳥取県</option>
+                    <option>島根県</option>
+                    <option>岡山県</option>
+                    <option>広島県</option>
+                    <option>山口県</option>
+                    <option>徳島県</option>
+                    <option>香川県</option>
+                    <option>愛媛県</option>
+                    <option>高知県</option>
+                    <option>福岡県</option>
+                    <option>佐賀県</option>
+                    <option>長崎県</option>
+                    <option>熊本県</option>
+                    <option>大分県</option>
+                    <option>宮崎県</option>
+                    <option>鹿児島県</option>
+                    <option>沖縄県</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label>市区町村</label>
+                  <select class="form-control selectric">
+                    <opftion>West Java</opftion>
+                    <option>East Java</option>
+                  </select>
+                </div>
+                </div>
+                <div class="row">
+                <div class="form-group col-6">
+                  <label>City</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group col-6">
+                  <label>郵便番号</label>
+                  <input type="text" class="form-control">
+                </div>
+                </div-->
+
+                <div class="form-group">
+                    {{ form_widget(registrationForm.legal) }}
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                      登録
+                    </button>
+                </div>
+                {{ form_end(registrationForm) }}
+              </div>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; Stisla 2018
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block plugins_js %}
+  <script src="../node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+{% endblock %}
+
+{% block page_js %}
+  <script>
+    var options = {
+        texts: ["とても弱い", "普通", "良い", "強い", "とても強い"],
+    };
+    $(".pwstrength").pwstrength(options);
+  </script>
+  <!--script src="../assets/js/page/auth-register.js"></script-->
+{% endblock %}

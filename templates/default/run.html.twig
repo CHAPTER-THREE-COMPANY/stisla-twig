@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% block title %}Run page{% endblock %}
+{% set title="run php code" %}
+
+{% block plugins_css %}
+    <link rel="stylesheet" href="{{ asset('node_modules/codemirror/lib/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/codemirror/addon/hint/show-hint.css') }}">
+{% endblock %}
+
+{% block plugins_js %}
+    <script src="{{ asset('node_modules/codemirror/lib/codemirror.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('node_modules/codemirror/theme/duotone-dark.css') }}">
+    <script src="{{ asset('node_modules/codemirror/addon/hint/show-hint.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/addon/hint/anyword-hint.js') }}"></script>
+    <!-- 言語に応じたjsファイルを読み込む -->
+    <script src="{{ asset('node_modules/codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/mode/clike/clike.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/mode/javascript/javascript.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/mode/css/css.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/mode/php/php.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+
+    <script src="{{ asset('node_modules/codemirror/addon/selection/active-line.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/addon/lint/lint.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('node_modules/codemirror/addon/lint/lint.css') }}">
+
+    <script src="{{ asset('node_modules/codemirror/addon/edit/closebrackets.js') }}"></script>
+    <script src="{{ asset('node_modules/codemirror/addon/edit/closetag.js') }}"></script>
+
+    <style>
+        .CodeMirror {
+            font-family: Monaco, 'Andale Mono', 'Lucida Console', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
+            font-size: 9pt;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+            mode: "php",
+            lineNumbers: true,
+            lineWrapping: true,　 // 行を折り返す
+            indentUnit: 4,
+            theme: 'duotone-dark',
+            autoCloseBrackets: true,
+            tabMode: 'indent',
+            matchBrackets: true,
+            indentWithTabs: true,
+            enterMode: 'keep',
+            startOpen: true,
+
+            styleActiveLine: true, // Addon
+            extraKeys: {"Ctrl-Space": "autocomplete"},
+
+            gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
+            onCursorActivity: function() {
+                editor.addLineClass(hlLine, null);
+                hlLine = editor.addLineClass(editor.getCursor().line, "CodeMirror-activeline-background");
+            },
+
+            /*onCursorActivity: function() {
+                editor.setLineClass(hlLine, null, null);
+                hlLine = editor.setLineClass(editor.getCursor().line, null, 'activeline');
+            },*/
+            onChange: function(){
+                editor.save();
+            }
+        });
+        editor.setSize("100%", "30%");
+
+        var widgets = [];
+        function resetWidgets() {
+            for (var i = 0; i < widgets.length; ++i)
+                editor.removeLineWidget(widgets[i]);
+            widgets.length = 0;
+        }
+        function resetLineClasses() {
+            lineCount = editor.doc.size;
+            for (var i = 0; i < lineCount; ++i)
+                editor.removeLineClass(i, "background");
+        }
+        function createLineWidget(line, message) {
+            var msg = document.createElement("div");
+            var icon = msg.appendChild(document.createElement("span"));
+            icon.innerHTML = "!!";
+            icon.className = "lint-error-icon";
+            msg.appendChild(document.createTextNode(message));
+            msg.className = "lint-error";
+            widgets.push(editor.addLineWidget(line, msg, {coverGutter: false, noHScroll: true}));
+        }
+        function submitCode() {
+            code = "code=" + encodeURI(editor.getValue());
+            code = "code=" + editor.getValue();
+            //code = code.replace('+', '[_PLUS_]');
+            var xhr = $.ajax({
+                type: "POST",
+                url: "{{ path('eval') }}",
+                data: code,
+                dataType: 'text',
+                success: function(res){
+                    // res = html result
+                    $("div.codemirror-result").html(res);
+                    // handle error
+                    var error = $.parseJSON( xhr.getResponseHeader("Z-Error") );
+                    if(error) {
+                        // highlight the error line
+                        editor.addLineClass(error.line, "background", "CodeMirror-highlightErrorline-background");
+                        // set focus to line after the error
+                        editor.setCursor({line: error.line+1});
+                        editor.focus();
+                        // set error line widget above the error line
+                        resetWidgets();
+                        createLineWidget(error.line-1, error.message);
+                    } else {
+                        resetWidgets();
+                        resetLineClasses();
+                    }
+                }
+            });
+        }
+        // bind clicking the "run" button
+        $("div.btn-run").click(function (){
+            submitCode();
+        });
+        // bind key "F9" as "submit & run code"
+        CodeMirror.keyMap.LiveEditor = {
+            'F9': function(cm) {
+                submitCode();
+            },
+            fallthrough: 'pcDefault'
+        };
+        editor.focus();
+        editor.setCursor({line: 2});
+        editor.setSize('100%', '100%');
+    </script>
+
+{% endblock %}
+
+{# -------------------------------------------------- #}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ path('run') }}" method="post">
+                <input type="hidden" name="view" value="repository.tool.function">
+                <input type="hidden" name="action" value="index">
+                <input type="hidden" name="repo_key" value="{{repo_key}}">
+                <div class="form-group row">
+                    <label for="code" class="col-sm-5 form-control-label">PHP code</label>
+                    <!--button type="submit" class="btn btn-primary">実行</button-->
+                </div>
+                <div class="form-group">
+                    <div class="btn btn-run btn-primary">&#9658; Run</div>
+                    <!--div class="col-12 form-control-label"--><small>※php codeを記述し最後にreturnで戻り値を返して下さい。(ctrl+space:autocomplete)</small><!--/div-->
+                    <!--textarea type="text" name="keyword" class="form-control" id="input-keyword" placeholder="function" rows="25">{#{keyword}#}</textarea-->
+                    <textarea id="code" name="code" rows="10" cols="1" autocapitalize="off" autocorrect="off" wrap="off"><?php{{ keyword }}{{ "\n" }}?></textarea>
+                </div>
+                <div class="row">
+                    <label for="input-keyword" class="col-sm-2 form-control-label">result</label>
+                </div><div class="row">
+                    <div class="col-sm-6">
+                        <pre class="pre-scrollable bg-dark text-white p-2">
+                            <div class="codemirror-result"></div>
+                        </pre>
+                        <pre>{{result}}</pre>
+                    </div>
+                    <!--div class="form-group row">
+                    <label for="input-filename" class="col-sm-2 form-control-label">ファイル名</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="filename" class="form-control" id="input-filename" placeholder="全検索: (*) / PHPのみ: (*.php) / CSSのみ: (*.css)" value="{#{filename}#}">
+                    </div></div-->
+                </div>
+                <!--div class="form-group row">
+                    <label class="col-sm-2">オプション</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="is_function" value="1" {#% if is_function %}checked{% endif %#}> function
+                            </label>
+                        </div>
+                    </div>
+                </div-->
+                <div class="form-group row">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    {% if result %}
+        <hr>
+    {% endif %}
+
+{% endblock %}
