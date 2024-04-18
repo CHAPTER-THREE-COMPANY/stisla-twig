@@ -6,7 +6,7 @@ use ChapterThree\StislaTwigBundle\DependencyInjection\C3HelloExtension;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class ChapterThreeStislaTwigBundle extends AbstractBundle
+class C3StislaTwigBundle extends AbstractBundle
 {
     public function getContainerExtension(): ?ExtensionInterface
     {
