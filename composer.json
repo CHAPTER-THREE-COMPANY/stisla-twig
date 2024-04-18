@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ChapterThree\\Stisla\\": "src"
+            "ChapterThree\\StislaTwigBundle\\": "src"
         }
     },
     "extra": {
