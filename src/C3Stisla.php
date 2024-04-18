@@ -1,6 +1,6 @@
 <?php
 
-namespace ChapterThree\StislaTwigBundlea;
+namespace ChapterThree\StislaTwigBundle;
 
 class C3Stisla
 {
