@@ -2,7 +2,7 @@
 
 namespace ChapterThree\StislaTwigBundle\Command;
 
-use ChapterThree\Stisla\C3Stisla;
+use ChapterThree\StislaTwigBundle\C3Stisla;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,7 +35,7 @@ class c3ConfigCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->ask("pause");
-        Stisla::info();
+        C3Stisla::info();
         $io->ask("start");
 
 
