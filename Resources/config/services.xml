@@ -7,7 +7,6 @@
     <services>
         <service id="ChapterThree\Stisla\Command\c3ConfigCommand">
             <tag name="console.command" command="c3:config" />
-            <argument type="service" id="ChapterThree\Stisla\Command\c3ConfigCommand" />
         </service>
     </services>
 </container>
