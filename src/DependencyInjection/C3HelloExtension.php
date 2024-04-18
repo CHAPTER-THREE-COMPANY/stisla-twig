@@ -14,8 +14,17 @@ class C3HelloExtension extends Extension
         // ... you'll load the files here later
         $loader = new XmlFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../../config')
+            new FileLocator(__DIR__.'/../../Resources/config')
         );
         $loader->load('services.xml');
+
+/*        $container->addCompilerPass()->addAnnotatedClassesToCompile([
+            // you can define the fully qualified class names...
+            'Acme\\BlogBundle\\Controller\\AuthorController',
+            // ... but glob patterns are also supported:
+            'Acme\\BlogBundle\\Form\\**',
+
+            // ...
+        ]);*/
     }
 }
