@@ -5,16 +5,16 @@ services:
       command: c3:config
     class: ChapterThree\StislaTwigBundle\Command\c3ConfigCommand
     public: true
-
-twig:
-  globals:
-    menu_long: '%env(MENU_LONG)%'
-    menu_short: '%env(MENU_SHORT)%'
-    title: '%env(TITLE)%'
-    site_name: '%env(SITE_NAME)%'
-    version: '%env(VERSION)%'
-    ga_tracking_id: '%env(GA_TRACKING_ID)%'
-
-  paths:
-    #'%kernel.project_dir%/vendor/chapter-three-company/stisla-twig/Resources/templates': 'c3'
-    '../../Resources/templates': 'c3'
+#
+#twig:
+#  globals:
+#    menu_long: '%env(MENU_LONG)%'
+#    menu_short: '%env(MENU_SHORT)%'
+#    title: '%env(TITLE)%'
+#    site_name: '%env(SITE_NAME)%'
+#    version: '%env(VERSION)%'
+#    ga_tracking_id: '%env(GA_TRACKING_ID)%'
+#
+#  paths:
+#    #'%kernel.project_dir%/vendor/chapter-three-company/stisla-twig/Resources/templates': 'c3'
+#    '../../Resources/templates': 'c3'
