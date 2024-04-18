@@ -16,8 +16,8 @@ class ChapterThreeStislaTwigBundle extends AbstractBundle
 
         return $this->extension;
     }
-    public function getPath(): string
+    /*public function getPath(): string
     {
         return dirname(__DIR__);
-    }
+    }*/
 }
