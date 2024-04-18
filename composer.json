@@ -1,6 +1,7 @@
 {
     "name": "chapter-three-company/stisla-twig",
     "description": "stisla for tiwg. ...",
+    "type": "symfony-bundle",
     "keywords": [
         "symfony",
         "twig",
