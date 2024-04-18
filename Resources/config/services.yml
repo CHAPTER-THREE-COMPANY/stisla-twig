@@ -1,0 +1,7 @@
+services:
+  ChapterThree\StislaTwigBundle\Command\c3ConfigCommand:
+    tags:
+      name: console.command
+      command: c3:config
+    class: ChapterThree\StislaTwigBundle\Command\c3ConfigCommand
+    public: true
