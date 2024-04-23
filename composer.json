@@ -61,7 +61,7 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "ikawa": [
-            "ChapterThree\\StislaTwigBundle\\C3Stisla::info"
+            "ChapterThree\\C3Bundle\\C3Stisla::info"
         ]
     }
 }
