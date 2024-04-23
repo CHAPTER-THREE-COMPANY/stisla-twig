@@ -1,5 +1,5 @@
 <?php
-// src/DependencyInjection/AcmeHelloExtension.php
+
 namespace ChapterThree\C3Bundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class C3HelloExtension extends Extension
+class C3Extension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
