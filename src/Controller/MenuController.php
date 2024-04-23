@@ -3,48 +3,64 @@
 namespace ChapterThree\C3Bundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MenuController extends AbstractController
 {
-    #[Route('/menu', name: 'menu')]
+    private $base_url;
+
+    public function __construct(UrlGeneratorInterface $router)
+    {
+        $this->base_url = $router->getContext()->getBaseUrl();
+    }
+
+    #[Route('/menu/{page}', name: 'menu')]
     public function index($page)
     {
-        return $this->render('@C3/menu.html.twig', [
+        return $this->render('menu.html.twig', [
             'page' => $page,
-            'menu' => $this->getMenu()
+            'menu' => $this->getMenuArray($this->getParameter('app.menu'))
         ]);
     }
 
-    private function getMenu(): array
+    #[Route('/menu/button')]
+    public function button($page)
     {
-        $menu = [];
-
-        // Default::index にも、保護コード解除あり
-        $menu = array_merge($menu, [
-            ['group'=>'ダッシュボード', 'icon'=>'fas fa-user', 'title'=>'派遣ダッシュボード', 'url'=>'/'],
-            ['group'=>'ダッシュボード', 'icon'=>'fas fa-user-tie', 'title'=>'社員ダッシュボード', 'url'=>'/'],
-
-            ['group'=>'拠点メニュー', 'title'=>'本社', 'icon'=>'fas fa-building', 'url'=>'/shift/calender/honsya'],
-            ['group'=>'拠点メニュー', 'title'=>'柏 センター', 'icon'=>'fas fa-building', 'url'=>'/shift/calender/kashiwa'],
-            ['group'=>'拠点メニュー', 'title'=>'流山センター', 'icon'=>'fas fa-users', 'url'=>'/shift/calender/nagareyama'],
-            ['group'=>'拠点メニュー', 'title'=>'辰巳センター', 'icon'=>'fas fa-warehouse', 'url'=>'/shift/calender/tatsumi'],
-            ['group'=>'拠点メニュー', 'title'=>'浦和センター', 'icon'=>'fas fa-store', 'url'=>'/shift/calender/urawa'],
-            ['group'=>'管理メニュー',
-                'item'=>[
-                    [
-                        'icon'=>'fa-columns',
-                        'title'=>'本部メニュー',
-                        'item'=>[
-                            ['url'=>'/news/list', 'title'=>'お知らせ登録'],
-                            //['url'=>'/admin',  'title'=>'DB操作'],
-                        ]
-                    ],
-                ]
-            ],
-            ['group'=>'その他メニュー', 'title'=>'TOP', 'icon'=>'fas fa-building', 'url'=>'/'],
+        return $this->render('menu_button.html.twig', [
+            'page' => $page,
+            'menu' => $this->getMenuArray($this->getParameter('app.menu'))
         ]);
-        return $menu;
+    }
+
+    private function getMenuArray($menu_list)
+    {
+		foreach ($menu_list as $key=>$value){
+			if (is_array($value)){
+				$menu_list[$key] = $this->getMenuArray($value);
+			}
+			if (strtolower($key) == 'url') {
+				if (substr($value, 0, 4) == 'http')
+					$menu_list[$key] = $value;
+				else
+					$menu_list[$key] = $this->base_url . $value;
+			}
+		}
+        return $menu_list;
+    }
+
+    #[Route('/menu/write', name: 'menu_write')]
+    public function write()
+    {
+        $data = [];
+        //$data = $this->getMenu();
+        $data = ['parameters'=>['app.menu'=>$data]];
+        $data = Yaml::dump($data,5);
+        //file_put_contents('../config/packages/chapter_three_menu.yaml', $data);
+        return new Response('ok');
     }
 
 }
