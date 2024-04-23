@@ -8,7 +8,7 @@ use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class C3Bundle extends AbstractBundle
 {
-    public function createContainerExtension(): ?ExtensionInterface
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new C3Extension();
     }
