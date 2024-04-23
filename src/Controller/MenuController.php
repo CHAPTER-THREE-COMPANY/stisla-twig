@@ -21,7 +21,7 @@ class MenuController extends AbstractController
     #[Route('/menu/{page}', name: 'menu')]
     public function index($page)
     {
-        return $this->render('menu.html.twig', [
+        return $this->render('@C3/menu.html.twig', [
             'page' => $page,
             'menu' => $this->getMenuArray($this->getParameter('app.menu'))
         ]);
@@ -30,7 +30,7 @@ class MenuController extends AbstractController
     #[Route('/menu/button')]
     public function button($page)
     {
-        return $this->render('menu_button.html.twig', [
+        return $this->render('@C3/menu_button.html.twig', [
             'page' => $page,
             'menu' => $this->getMenuArray($this->getParameter('app.menu'))
         ]);
