@@ -23,7 +23,7 @@ class C3Extension extends Extension
             //new FileLocator(__DIR__.'/../../Resources')
             new FileLocator(__DIR__.'/../../config')
         );
-#        $loader->load('services.yaml');
+        $loader->load('services.yaml');
 //        $loader->load('routes.yaml');
 
 /*        $container->addCompilerPass()->addAnnotatedClassesToCompile([
