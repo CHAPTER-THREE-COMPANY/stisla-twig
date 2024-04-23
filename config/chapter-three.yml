@@ -5,4 +5,7 @@ twig:
     title: '%env(TITLE)%'
     site_name: '%env(SITE_NAME)%'
     version: '%env(VERSION)%'
-    ga_tracking_id: '%env(GA_TRACKING_ID)%'
+    ga_tracking_id: '%c3.ga_tracking_id%'
+
+parameters:
+  c3.ga_tracking_id: ''
