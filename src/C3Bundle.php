@@ -12,8 +12,8 @@ class C3Bundle extends AbstractBundle
     {
         return new C3Extension();
     }
-    /*public function getPath(): string
+    public function getPath(): string
     {
         return dirname(__DIR__);
-    }*/
+    }
 }
