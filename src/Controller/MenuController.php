@@ -10,7 +10,7 @@ class MenuController extends AbstractController
     #[Route('/menu', name: 'menu')]
     public function index($page)
     {
-        return $this->render('menu.html.twig', [
+        return $this->render('@C3/menu.html.twig', [
             'page' => $page,
             'menu' => $this->getMenu()
         ]);
