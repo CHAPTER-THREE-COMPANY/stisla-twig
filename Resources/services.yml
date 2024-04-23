@@ -20,14 +20,5 @@ services:
 #    '../../Resources/templates': 'c3'
 
 
-twig:
-  globals:
-    menu_long: '%env(MENU_LONG)%'
-    menu_short: '%env(MENU_SHORT)%'
-    title: '%env(TITLE)%'
-    site_name: '%env(SITE_NAME)%'
-    version: '%env(VERSION)%'
-    ga_tracking_id: '%c3.ga_tracking_id%'
-
 parameters:
   c3.ga_tracking_id: ''
