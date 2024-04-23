@@ -1,8 +1,8 @@
 <?php
 
-namespace ChapterThree\StislaTwigBundle\Command;
+namespace ChapterThree\C3Bundle\Command;
 
-use ChapterThree\StislaTwigBundle\C3Stisla;
+use ChapterThree\C3Bundle\C3Stisla;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

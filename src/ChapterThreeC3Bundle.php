@@ -1,12 +1,12 @@
 <?php
 
-namespace ChapterThree\StislaTwigBundle;
+namespace ChapterThree\C3Bundle;
 
-use ChapterThree\StislaTwigBundle\DependencyInjection\C3HelloExtension;
+use ChapterThree\C3Bundle\DependencyInjection\C3HelloExtension;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class ChapterThreeStislaTwigBundle extends AbstractBundle
+class ChapterThreeC3Bundle extends AbstractBundle
 {
     public function getContainerExtension(): ?ExtensionInterface
     {

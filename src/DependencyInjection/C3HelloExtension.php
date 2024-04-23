@@ -1,6 +1,6 @@
 <?php
 // src/DependencyInjection/AcmeHelloExtension.php
-namespace ChapterThree\StislaTwigBundle\DependencyInjection;
+namespace ChapterThree\C3Bundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
