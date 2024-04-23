@@ -1,6 +1,6 @@
 {
   "recipes": {
-    "ChapterThree/StislaTwigBundle": [
+    "ChapterThree/C3Bundle": [
       "1.0"
     ]
   },
@@ -8,7 +8,7 @@
   "is_contrib": true,
   "_links": {
     "repository": "github.com/CHAPTER-THREE-COMPANY/stisla-twig",
-    "origin_template": "ChapterThree.StislaTwigBundle:0.1@github.com/CHAPTER-THREE-COMPANY/stisla-twig:0.0",
-    "recipe_template": "https://api.github.com/repos/CHAPTER-THREE-COMPANY/stisla-twig/contents/ChapterThree.StislaTwigBundle.0.1.json"
+    "origin_template": "ChapterThree.C3Bundle:0.1@github.com/CHAPTER-THREE-COMPANY/stisla-twig:0.0",
+    "recipe_template": "https://api.github.com/repos/CHAPTER-THREE-COMPANY/stisla-twig/contents/ChapterThree.C3Bundle.0.1.json"
   }
 }
