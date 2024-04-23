@@ -2,7 +2,7 @@ parameters:
   app.menu:
     - title: 'メニュー'
       item:
-        - {title: 'お知らせ', path: 'news_index', icon: 'far fa-newspaper' }
+#        - {title: 'お知らせ', path: 'news_index', icon: 'far fa-newspaper' }
         - {title: '工藤Youtube', url: 'https://www.youtube.com/user/kiyocorate/videos?view=0&sort=dd&shelf_id=1', icon: 'fab fa-youtube'}
         - {title: '公開Dropbox', url: 'https://www.dropbox.com/sh/xgo5zqfbqrmusbw/AACs9EcMXpJb0N4FAKh2qVJKa?dl=0'}
 

@@ -2,16 +2,16 @@ parameters:
   app.menu:
     - title: 'メニュー'
       item:
-        - {title: 'お知らせ', path: 'news_index', icon: 'far fa-newspaper' }
+#        - {title: 'お知らせ', path: 'news_index', icon: 'far fa-newspaper' }
         - {title: '工藤Youtube', url: 'https://www.youtube.com/user/kiyocorate/videos?view=0&sort=dd&shelf_id=1', icon: 'fab fa-youtube'}
         - {title: '公開Dropbox', url: 'https://www.dropbox.com/sh/xgo5zqfbqrmusbw/AACs9EcMXpJb0N4FAKh2qVJKa?dl=0'}
 
     - title: '団員専用メニュー'
       item:
         - {title: 'ログイン', url: '/login', icon: 'fas fa-user-plus', roles: '!IS_AUTHENTICATED_FULLY' }
-        - {title: '合唱団資料', path: 'aws_s3', icon: 'fas fa-book-reader', roles: 'IS_AUTHENTICATED_FULLY' }
+#        - {title: '合唱団資料', path: 'aws_s3', icon: 'fas fa-book-reader', roles: 'IS_AUTHENTICATED_FULLY' }
         - {title: 'ログイン新規登録', url: '/register', icon: 'fas fa-user-plus', roles: '!IS_AUTHENTICATED_FULLY' }
 
     - title: '管理用'
       item:
-        - {title: 'お知らせ登録', path: 'news_list', icon: 'fas fa-edit' }
+#        - {title: 'お知らせ登録', path: 'news_list', icon: 'fas fa-edit' }
