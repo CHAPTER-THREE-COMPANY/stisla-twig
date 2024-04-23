@@ -8,15 +8,11 @@ use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class C3Bundle extends AbstractBundle
 {
-/*    public function getContainerExtension(): ?ExtensionInterface
+    public function createContainerExtension(): ?ExtensionInterface
     {
-        if (!$this->extension) {
-            $this->extension = new C3Extension();
-        }
-
-        return $this->extension;
+        return new C3Extension();
     }
-*/    /*public function getPath(): string
+    /*public function getPath(): string
     {
         return dirname(__DIR__);
     }*/
