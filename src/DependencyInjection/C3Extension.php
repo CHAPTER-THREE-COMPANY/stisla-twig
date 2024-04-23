@@ -24,7 +24,7 @@ class C3Extension extends Extension
             new FileLocator(__DIR__.'/../../config')
         );
         $loader->load('services.yaml');
-        $loader->load('routes.yaml');
+//        $loader->load('routes.yaml');
 
 /*        $container->addCompilerPass()->addAnnotatedClassesToCompile([
             // you can define the fully qualified class names...
