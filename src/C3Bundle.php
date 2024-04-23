@@ -6,7 +6,7 @@ use ChapterThree\C3Bundle\DependencyInjection\C3HelloExtension;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class ChapterThreeC3Bundle extends AbstractBundle
+class C3Bundle extends AbstractBundle
 {
     public function getContainerExtension(): ?ExtensionInterface
     {
