@@ -246,7 +246,7 @@
                 <div class="sidebar-brand sidebar-brand-sm">
                     <a href="{{path('app_home')}}">{{ menu_short }}</a>
                 </div>
-                {{ render(controller("App\\Controller\\Defaults\\MenuController::index", {'page':app.request.requestUri})) }}
+                {{ render(controller("ChapterThree\\C3Bundle\\Controller\\MenuController::index", {'page':app.request.requestUri})) }}
             </aside>
         </div>
 
