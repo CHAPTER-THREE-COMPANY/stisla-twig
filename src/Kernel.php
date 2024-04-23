@@ -1,6 +1,6 @@
 <?php
 
-namespace ChapterThree\StislaTwigBundle;
+namespace ChapterThree\C3Bundle;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
