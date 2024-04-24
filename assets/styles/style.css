@@ -190,19 +190,19 @@ select.form-control:not([size]):not([multiple]) {
   background-size: 40px;
   padding-right: 60px; }
   .form-control.creditcard.visa {
-    background-image: url("../../public/img/visa.png"); }
+    background-image: url("../img/visa.png"); }
   .form-control.creditcard.americanexpress {
-    background-image: url("../../public/img/americanexpress.png"); }
+    background-image: url("../img/americanexpress.png"); }
   .form-control.creditcard.dinersclub {
-    background-image: url("../../public/img/dinersclub.png"); }
+    background-image: url("../img/dinersclub.png"); }
   .form-control.creditcard.discover {
-    background-image: url("../../public/img/discover.png"); }
+    background-image: url("../img/discover.png"); }
   .form-control.creditcard.jcb {
-    background-image: url("../../public/img/jcb.png"); }
+    background-image: url("../img/jcb.png"); }
   .form-control.creditcard.mastercard {
-    background-image: url("../../public/img/mastercard.png"); }
+    background-image: url("../img/mastercard.png"); }
   .form-control.creditcard.visa {
-    background-image: url("../../public/img/visa.png"); }
+    background-image: url("../img/visa.png"); }
 
 .form-group {
   margin-bottom: 25px; }
