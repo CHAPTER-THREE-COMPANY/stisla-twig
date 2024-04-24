@@ -209,7 +209,7 @@
                 </li>
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         {#TODO: C3 mika asset('avatar/avatar-1.png','img') => asset('img/avatar/avatar-1.png')#}
-                        <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                        <img alt="image" src="{{ asset('@C3/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">{% if is_granted('IS_AUTHENTICATED_FULLY') %}{{ app.user.fullname | default(app.user.email) }}{% endif %}</div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
