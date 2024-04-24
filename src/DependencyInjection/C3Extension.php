@@ -62,16 +62,21 @@ class C3Extension extends Extension implements PrependExtensionInterface
 
     private function isAssetMapperAvailable(ContainerBuilder $container): bool
     {
+        dump("Start3");
         if (!interface_exists(AssetMapperInterface::class)) {
             return false;
         }
 
+        dump("Start4");
         // check that FrameworkBundle 6.3 or higher is installed
         $bundlesMetadata = $container->getParameter('kernel.bundles_metadata');
         if (!isset($bundlesMetadata['FrameworkBundle'])) {
+            dump("Start5");
+
             return false;
         }
 
+        dump("Start6");
         return is_file($bundlesMetadata['FrameworkBundle']['path'].'/Resources/config/asset_mapper.php');
     }
 }
