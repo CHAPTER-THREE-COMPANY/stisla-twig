@@ -1,0 +1,1 @@
+require('./page/index-0.js');
