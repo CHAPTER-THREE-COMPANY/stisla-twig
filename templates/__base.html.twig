@@ -15,7 +15,8 @@
   <title>{{ title }} &mdash; {{ site_name }}</title>
   <link rel="icon" href="{{ path('app_home') }}favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ path('app_home') }}apple-touch-icon.png">
-  <script src="{{ asset('@C3/assets/app.js') }}" />
+  <!--script src="{{ asset('@C3/assets/app.js') }}" /-->
+  {{ importmap('c3app') }}
 
   {% if ga_tracking_id != '' %}
   <!-- Global site tag (gtag.js) - Google Analytics -->
