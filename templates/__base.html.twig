@@ -16,7 +16,6 @@
   <title>{{ title }} &mdash; {{ site_name }}</title>
   <link rel="icon" href="{{ app.request.baseUrl }}favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ app.request.baseUrl }}apple-touch-icon.png">
-  {{ importmap('c3app') }}
 
   {% if ga_tracking_id != '' %}
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -30,6 +29,7 @@
   </script>
   {% endif %}
 
+  {% block importmap %}{{ importmap('app') }}{% endblock %}
 
   <!-- General CSS Files -->
   <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
@@ -64,7 +64,6 @@
 
 
 {#  {{ encore_entry_script_tags('app') }}#}
-{#% block importmap %}{{ importmap('app') }}{% endblock %#}
 
   <!-- JS Libraies -->
 {% block plugins_js %}{% endblock %}
