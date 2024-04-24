@@ -15,6 +15,7 @@
   <title>{{ title }} &mdash; {{ site_name }}</title>
   <link rel="icon" href="{{ path('app_home') }}favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ path('app_home') }}apple-touch-icon.png">
+  <script src="{{ asset('bundles/c3/assets/app-7a8ac0be5c567c4129c36ce7d4e44a40.js') }}" />
 
   {% if ga_tracking_id != '' %}
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -63,7 +64,7 @@
 
 {#  {{ encore_entry_script_tags('app') }}#}
 
-{% block importmap %}{{ importmap('@C3/c3app') }}{% endblock %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
 
   <!-- JS Libraies -->
 {% block plugins_js %}{% endblock %}
