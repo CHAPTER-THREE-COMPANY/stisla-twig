@@ -12,25 +12,25 @@
                   <a href="#" class="nav-link has-dropdown"><i class="{{ sub.icon|default('fas fa-square') }}"></i><span>{{ sub.title }}</span></a>
                   <ul class="dropdown-menu{{ ' show'|is_active(sub.item, page)|safe }}">
                     {% for item in sub.item %}
-                      {% set url = item.url|default(path(item.path|default('app_home'))) %}
+                      {% set url = item.url|default(path(item.path|default(app.request.baseUrl))) %}
                     <li{{ ' class=active'|is_active(url, page)|safe }}><a class="nav-link" href="{{ url }}">{{ item.title }}</a></li>
                     {% endfor %}
                   </ul>
                 </li>
                 {% else %}
                   {% if sub.roles is not defined %}
-                    <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default('app_home'))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
+                    <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default(app.request.baseUrl))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
                   {% else %}
                     {% if sub.roles|slice(0,1)=="!" and not is_granted(sub.roles|slice(1)) %}
-                      <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default('app_home'))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
+                      <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default(app.request.baseUrl))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
                     {% elseif is_granted(sub.roles) %}
-                      <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default('app_home'))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
+                      <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ sub.url| default(path(sub.path|default(app.request.baseUrl))) }}"><i class="{{ sub.icon|default('far fa-square') }}"></i> <span>{{ sub.title }}</span></a></li>
                     {% endif %}
                   {% endif %}
                 {% endif %}
               {% endfor %}
             {% else %}
-              <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ group.url| default(path(group.path|default('app_home'))) }}"><i class="{{ group.icon|default('far fa-square') }}"></i> <span>{{ group.title }}</span></a></li>
+              <li{{ ' class="active"'|is_active('^blank(.*)', page)|safe }}><a class="nav-link" href="{{ group.url| default(path(group.path|default(app.request.baseUrl))) }}"><i class="{{ group.icon|default('far fa-square') }}"></i> <span>{{ group.title }}</span></a></li>
             {% endif %}
             {% endfor %}
           </ul>
