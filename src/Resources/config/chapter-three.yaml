@@ -1,0 +1,22 @@
+parameters:
+  timezone: '%env(APP_TIMEZONE)%'
+
+  env(MENU_LONG): 'STISLA'
+  env(MENU_SHORT): 'ST'
+  env(TITLE): 'STISLA'
+  env(SITE_NAME): 'CHAPTER-THREE PRESENTS'
+  env(VERSION): 'version 2.1'
+  env(GA_TRACKING_ID): ''
+
+twig:
+  paths:
+  #'%kernel.project_dir%/vendor/symfony/web-profiler-bundle/Resources/views/Profiler': 'c3'
+
+  globals:
+    menu_long: '%env(MENU_LONG)%'
+    menu_short: '%env(MENU_SHORT)%'
+    title: '%env(TITLE)%'
+    site_name: '%env(SITE_NAME)%'
+    version: '%env(VERSION)%'
+    ga_tracking_id: '%env(GA_TRACKING_ID)%'
+
