@@ -63,8 +63,8 @@
 
 
 {#  {{ encore_entry_script_tags('app') }}#}
-
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+  {{ importmap('app') }}
+{#% block importmap %}{{ importmap('app') }}{% endblock %#}
 
   <!-- JS Libraies -->
 {% block plugins_js %}{% endblock %}
