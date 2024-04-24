@@ -1,7 +1,7 @@
 console.log("OK")
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+//import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'summernote/dist/summernote-bs4.css'
 import './styles/style.css';
@@ -13,8 +13,14 @@ const jQuery = $
 window.$ = window.jQuery = $;
 import 'popper.js'
 import 'bootstrap';
-import 'bootstrap-datepicker'
-import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js'
+
+
+import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js";
+import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.css";
+import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/locales/bootstrap-datepicker.ja.min.js";
+
+//import 'bootstrap-datepicker'
+//import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js'
 import 'jquery.nicescroll'
 import 'moment'
 import 'summernote'
