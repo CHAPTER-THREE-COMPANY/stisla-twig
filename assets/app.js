@@ -13,14 +13,8 @@ const jQuery = $
 window.$ = window.jQuery = $;
 import 'popper.js'
 import 'bootstrap';
-
-
-import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js";
-import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.css";
-import "https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/locales/bootstrap-datepicker.ja.min.js";
-
-//import 'bootstrap-datepicker'
-//import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js'
+import 'bootstrap-datepicker'
+import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js'
 import 'jquery.nicescroll'
 import 'moment'
 import 'summernote'
