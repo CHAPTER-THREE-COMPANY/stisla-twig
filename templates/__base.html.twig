@@ -14,8 +14,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>{{ title }} &mdash; {{ site_name }}</title>
-  <link rel="icon" href="{{ path('app_home') }}favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ path('app_home') }}apple-touch-icon.png">
+  <link rel="icon" href="{{ app.request.baseUrl }}favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ app.request.baseUrl }}apple-touch-icon.png">
   {{ importmap('c3app') }}
 
   {% if ga_tracking_id != '' %}
