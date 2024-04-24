@@ -1,0 +1,27 @@
+{
+  "manifests": {
+    "chapter-three-company/c3-bundle": {
+      "manifest": {
+        "bundles": {
+          "ChapterThree\\C3Bundle\\C3Bundle": [
+            "all"
+          ]
+        },
+        "copy-from-recipe": {
+          "Resources/config/": "%CONFIG_DIR%"
+        }
+      },
+      "files": {
+        "config/packages/acme_private.yaml": {
+          "contents": [
+            "acme_private:",
+            "    encode: true",
+            ""
+          ],
+          "executable": false
+        }
+      },
+      "ref": "a330a9e3ab083098509b7652f3edc656f727a039%"
+    }
+  }
+}
