@@ -718,7 +718,7 @@ select.form-control:not([size]):not([multiple]) {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
   .card.card-progress:not(.remove-spinner):after {
-    background-image: url("../../public/img/spinner.svg");
+    background-image: url("../img/spinner.svg");
     background-size: 80px;
     background-repeat: no-repeat;
     background-position: center; }
@@ -1005,7 +1005,7 @@ table tr:hover .table-links {
     height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 999;
-    background-image: url("../../public/img/spinner.svg");
+    background-image: url("../img/spinner.svg");
     background-size: 80px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1375,7 +1375,7 @@ h6 .badge {
 
 .btn-progress {
   position: relative;
-  background-image: url("../../public/img/spinner-white.svg");
+  background-image: url("../img/spinner-white.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px;
