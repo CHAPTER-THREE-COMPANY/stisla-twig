@@ -12,7 +12,7 @@
  * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
-    'c3app' => [
+    'app' => [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
@@ -22,12 +22,12 @@ return [
     'bootstrap' => [
         'version' => '4.2.1',
     ],
-    '@popperjs/core' => [
-        'version' => '2.11.8',
-    ],
     'bootstrap/dist/css/bootstrap.min.css' => [
         'version' => '4.2.1',
         'type' => 'css',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
     ],
     'popper.js' => [
         'version' => '1.16.1',
@@ -53,12 +53,12 @@ return [
     'bootstrap-daterangepicker' => [
         'version' => '3.0.3',
     ],
-    'moment' => [
-        'version' => '2.24.0',
-    ],
     'bootstrap-daterangepicker/daterangepicker.min.css' => [
         'version' => '3.0.3',
         'type' => 'css',
+    ],
+    'moment' => [
+        'version' => '2.24.0',
     ],
     'bootstrap-social' => [
         'version' => '5.1.1',
@@ -79,11 +79,11 @@ return [
     'chartjs-color' => [
         'version' => '2.4.1',
     ],
-    'color-convert' => [
-        'version' => '1.9.3',
-    ],
     'chartjs-color-string' => [
         'version' => '0.6.0',
+    ],
+    'color-convert' => [
+        'version' => '1.9.3',
     ],
     'color-name' => [
         'version' => '1.1.4',
