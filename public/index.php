@@ -1,6 +1,6 @@
 <?php
 
-use ChapterThree\StislaTwigBundle\Kernel;
+use ChapterThree\C3Bundle\Kernel;
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
