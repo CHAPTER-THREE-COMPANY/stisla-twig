@@ -47,7 +47,9 @@ class C3Extension extends Extension implements PrependExtensionInterface
 //            $container->prependExtensionConfig('twig', ['form_themes' => ['@LiveComponent/form_theme.html.twig']]);
 //        }
 
+        dump("Start1");
         if ($this->isAssetMapperAvailable($container)) {
+            dump("Start2");
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
