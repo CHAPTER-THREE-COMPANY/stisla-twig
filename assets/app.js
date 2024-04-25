@@ -1,3 +1,4 @@
+"use strict";
 console.log("OK")
 
 import '@fortawesome/fontawesome-free/css/all.min.css'
@@ -8,9 +9,11 @@ import './styles/style.css';
 import './styles/components.css'
 import './styles/custom.css';
 
-import $ from 'jquery';
+/*import $ from 'jquery';
 const jQuery = $
-window.$ = window.jQuery = $;
+window.$ = window.jQuery = $;*/
+import './js/stisla.js'
+
 import 'popper.js'
 import 'bootstrap';
 import 'bootstrap-datepicker'
@@ -19,7 +22,7 @@ import 'jquery.nicescroll'
 import 'moment'
 import 'summernote'
 import 'https://cdn.jsdelivr.net/npm/summernote@0.8.20/src/lang/summernote-ja-JP.js'
-import './js/stisla.js'
+
 import './js/scripts.js'
 import './js/custom.js'
 
