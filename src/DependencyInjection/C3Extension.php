@@ -14,12 +14,6 @@ class C3Extension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        /*$loader = new XmlFileLoader(
-            $container,
-            new FileLocator(__DIR__.'/../../Resources')
-        );
-        $loader->load('services.xml');
-        */
         $loader = new YamlFileLoader(
             $container,
             //new FileLocator(__DIR__.'/../../Resources')
@@ -51,7 +45,7 @@ class C3Extension extends Extension implements PrependExtensionInterface
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        __DIR__.'/../../assets' => '@C3',
+                        __DIR__.'/../../assets' => '@Cikawa3',
                     ],
                 ],
             ]);
