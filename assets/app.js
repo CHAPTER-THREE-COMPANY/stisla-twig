@@ -1,8 +1,8 @@
 console.log("OK")
 
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'summernote/dist/summernote-bs4.css'
 import './styles/style.css';
 import './styles/components.css'
@@ -18,11 +18,11 @@ import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js'
 import 'jquery.nicescroll'
 import 'moment'
 import 'summernote'
+import 'https://cdn.jsdelivr.net/npm/summernote@0.8.20/src/lang/summernote-ja-JP.js'
 import './js/stisla.js'
 import './js/scripts.js'
 import './js/custom.js'
 
-import 'https://cdn.jsdelivr.net/npm/summernote@0.8.20/src/lang/summernote-ja-JP.js'
 
 
 $('.js-datepicker').datepicker({
