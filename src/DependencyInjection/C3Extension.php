@@ -45,7 +45,7 @@ class C3Extension extends Extension implements PrependExtensionInterface
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        __DIR__.'/../../assets' => '@Cikawa3',
+                        __DIR__.'/../../assets' => '@C3',
                     ],
                 ],
             ]);
