@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'c3:install',
-    description: 'c3-bundle installation',
+    description: 'c3-bundle の利用方法を説明します',
 )]
 class C3InstallCommand extends Command
 {
@@ -42,7 +42,41 @@ class C3InstallCommand extends Command
             // ...
         }
 
-        $io->success('インストールしますよ! Now make it your own! Pass --help to see your options.');
+        $io->title("CHAPTER-THREE SUPER BUNDLE");
+
+        $io->ask("初期設定方法を説明します[enter]");
+
+        $io->writeln("初期設定");
+        $io->listing([
+            '1. importmap(\'app\') 用 jsファイル先頭に１行追加',
+            '     対象ファイル : asset/app.js',
+            '     追加内容 : import \'../vendor/chapter-three-company/c3-bundle/assets/app.js\'',
+            '2. 設定ファイルのコピー',
+            '     コピー元 : vender/chapter-three-company/c3-bundle/Resouces/config/ (２ファイル)',
+            '     コピー先 : config/packages/ ',
+            '3. importmap コンパイル',
+            '     symfony console asset-map:compile',
+            '4. キャッシュクリア',
+            '     symfony console cache:clear',
+        ]);
+        $io->note("composer require 後に 上記を行ってください");
+
+        $io->ask("つぎに利用方法を説明します[enter]");
+
+        $io->writeln("利用方法");
+        $io->listing([
+            '全てのtwig templateに適用させる',
+            '     1. templates/base.html.twig バックアップ',
+            '     2. templates/base.html.twig の編集',
+            '          {% extends \'@C3/_base.html.twig\' %}',
+            '          上記１行のみに変更',
+            'ページ単位で適用させる',
+            '     1. ***.html.twig の先頭を書き換え',
+            '          変更前 : {% extends \'_base.html.twig\' %}',
+            '          変更後 : {% extends \'@C3/_base.html.twig\' %}',
+        ]);
+
+        $io->success('上記利用方法を設定してください.');
 
         return Command::SUCCESS;
     }
