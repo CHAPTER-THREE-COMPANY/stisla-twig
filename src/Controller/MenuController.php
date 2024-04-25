@@ -2,7 +2,10 @@
 
 namespace ChapterThree\C3Bundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\Response;
 //use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -61,6 +64,29 @@ class MenuController extends AbstractController
         $data = Yaml::dump($data,5);
         //file_put_contents('../config/packages/chapter_three_menu.yaml', $data);
         return new Response('ok');
+    }
+
+    #[Route('/menu/command', name: 'menu_command')]
+    public function command()
+    {
+        $kernel = $this->container->get('kernel');
+        $application = new Application($kernel);
+        $application->setAutoExit(false);
+
+        $input = new ArrayInput(array(
+            'command' => 'cravler:maxmind:geoip-update'
+        ));
+        // You can use NullOutput() if you don't need the output
+        $output = new BufferedOutput();
+        $application->run($input, $output);
+
+        // return the output, don't use if you used NullOutput()
+        $content = $output->fetch();
+
+        // return new Response(""), if you used NullOutput()
+        dump($content);
+
+        return $this->render('@C3/default/index.html.twig');
     }
 
 }
