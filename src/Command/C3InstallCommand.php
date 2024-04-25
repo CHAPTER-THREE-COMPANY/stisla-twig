@@ -76,6 +76,29 @@ class C3InstallCommand extends Command
             '          変更後 : {% extends \'@C3/_base.html.twig\' %}',
         ]);
 
+        $io->ask("最後に開発方法を説明します[enter]");
+
+        $io->writeln("開発方法");
+        $io->listing([
+            'バンドルを開発モードでインストールする',
+            '     1. symfony composer req chapter-three-company/c3-bundle:dev-main',
+            'バンドルをアンインストールする',
+            '     1. symfony composer remove chapter-three-company/c3-bundle',
+            'バンドルの開発',
+            '     1. バンドルの開発',
+            '     2. バンドルの git commit & push',
+            '     3. 反映側 : symfony composer update',
+            '     4. 必要時 : symfony console asset-map:compile',
+            '     5. 必要時 : symfony console cache:clear',
+            'バンドルをインストール後の確認方法',
+            '     1. symfony console c3:',
+            '          c3:config',
+            '          c3:install',
+            '          などが表示される',
+            '     2. symfony console debug:asset-map',
+            '          @C3 の assetsが表示される',
+        ]);
+
         $io->success('上記利用方法を設定してください.');
 
         return Command::SUCCESS;
