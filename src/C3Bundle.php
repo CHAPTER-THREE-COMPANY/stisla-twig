@@ -13,7 +13,7 @@ use \Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Runtime\Symfony\Component\Console\Input\InputInterfaceRuntime;
 
-class C3Bundle extends Bundle
+class C3Bundle extends AbstractBundle
 {
     public function getContainerExtension(): ?ExtensionInterface
     {
