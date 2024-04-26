@@ -54,9 +54,12 @@ class C3InstallCommand extends Command
             '2. 設定ファイルのコピー',
             '     コピー元 : vender/chapter-three-company/c3-bundle/Resouces/config/ (２ファイル)',
             '     コピー先 : config/packages/ ',
-            '3. importmap コンパイル',
+            '---------↑ ここまでは初回1回のみ ↑---------',
+            '3. importmap install',
+            '     symfony console importmap:install',
+            '4. importmap コンパイル',
             '     symfony console asset-map:compile',
-            '4. キャッシュクリア',
+            '5. キャッシュクリア',
             '     symfony console cache:clear',
         ]);
         $io->note("composer require 後に 上記を行ってください");
@@ -87,7 +90,7 @@ class C3InstallCommand extends Command
             'バンドルの開発',
             '     1. バンドルの開発',
             '     2. バンドルの git commit & push',
-            '     3. 反映側 : symfony composer update',
+            '     3. 反映側 : symfony composer update chapter-three-company/c3-bundle',
             '     4. 必要時 : symfony console asset-map:compile',
             '     5. 必要時 : symfony console cache:clear',
             'バンドルをインストール後の確認方法',
@@ -96,7 +99,7 @@ class C3InstallCommand extends Command
             '          c3:install',
             '          などが表示される',
             '     2. symfony console debug:asset-map',
-            '          @C3 の assetsが表示される',
+            '          @C3 の assets が表示される',
         ]);
 
         $io->success('上記利用方法を設定してください.');
