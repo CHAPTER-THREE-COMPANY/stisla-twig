@@ -54,12 +54,15 @@ class C3InstallCommand extends Command
             '2. 設定ファイルのコピー',
             '     コピー元 : vender/chapter-three-company/c3-bundle/Resouces/config/ (２ファイル)',
             '     コピー先 : config/packages/ ',
+            '3. importmap.php 内容追加',
+            '     コピー元 : vender/chapter-three-company/c3-bundle/importmap.php ',
+            '     コピー先 : importmap.php ',
             '---------↑ ここまでは初回1回のみ ↑---------',
-            '3. importmap install',
+            '4. importmap install',
             '     symfony console importmap:install',
-            '4. importmap コンパイル',
+            '5. importmap コンパイル',
             '     symfony console asset-map:compile',
-            '5. キャッシュクリア',
+            '6. キャッシュクリア',
             '     symfony console cache:clear',
         ]);
         $io->note("composer require 後に 上記を行ってください");
