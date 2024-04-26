@@ -49,6 +49,15 @@ class C3ConfigCommand extends Command
 
         }*/
 
+        $importmap = require('importmap.php');
+        dump($importmap);
+        $io->progressStart(100);
+        for ($i = 0; $i < 100; ++$i) {
+            $io->progressAdvance();
+            usleep(10000);
+        }
+        $io->progressFinish();
+
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
         return Command::SUCCESS;

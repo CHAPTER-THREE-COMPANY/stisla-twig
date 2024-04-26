@@ -107,6 +107,9 @@ class C3InstallCommand extends Command
 
         $io->success('上記利用方法を設定してください.');
 
+
+
+
         return Command::SUCCESS;
     }
 }
