@@ -1,4 +1,98 @@
 <div{{ attributes }}>
     <!-- component html -->
-    ikawa
+    <twig:Vue2 title="ファイル共有">
+        <div class="p-3">
+            <h1>{{ title }}</h1>
+            <div id="app" class="section">
+                <div class="section-body">
+                    <div class="card">
+                        <v-app class="p-3">
+                            <v-card>
+                                <v-sheet class="pa-4 primary lighten-2">
+                                    <v-text-field
+                                            v-model="search"
+                                            label="ここに資料名の一部を入力すると検索できます。"
+                                            dark
+                                            flat
+                                            solo-inverted
+                                            hide-details
+                                            clearable
+                                            clear-icon="mdi-close-circle-outline"
+                                    ></v-text-field>
+                                </v-sheet>
+                                <v-card-text>
+                                    <v-treeview
+                                            v-model="tree"
+                                            item-key="name"
+                                            open-all
+                                            open-on-click
+                                            :items="items"
+                                            :search="search"
+                                    >
+                                        <template v-slot:label="{ item, open }">
+                                            <v-icon
+                                                    v-if="item.children"
+                                                    v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
+                                            >
+                                            </v-icon>
+                                            <v-icon
+                                                    v-else
+                                                    v-text="`${files[item.file]}`">
+                                            </v-icon>
+
+                                            <a v-bind:href="item.url" v-if="!item.children"><span v-text="item.name"></span></a>
+                                            <span v-else v-text="item.name"></span>
+                                        </template>
+                                    </v-treeview>
+                                </v-card-text>
+                            </v-card>
+                        </v-app>
+                    </div>
+                </div>
+            </div>
+            {#    <a class="btn btn-primary" href="{{ path('homepage') }}">トップページへ戻る</a>#}
+        </div>
+
+        <twig:block name="script">
+            <script>
+                var app = new Vue({
+                    el: '#app',
+                    delimiter: ['{$', '}}'],
+                    vuetify: new Vuetify(),
+                    data: () => ({
+                        items: [],
+                        tree: [],
+                        search: null,
+                        files: {
+                            html: 'mdi-language-html5',
+                            js: 'mdi-nodejs',
+                            json: 'mdi-code-json',
+                            md: 'mdi-language-markdown',
+                            pdf: 'mdi-file-pdf-outline',
+                            mp3: 'mdi-music',
+                            mp4: 'mdi-video-outline',
+                            m4v: 'mdi-video-outline',
+                            png: 'mdi-file-image',
+                            jpg: 'mdi-file-image',
+                            txt: 'mdi-file-document-outline',
+                            xls: 'mdi-file-excel',
+                        },
+                    }),
+                    mounted: function ()  {
+                        document.getElementById("app").style.cursor = 'wait'
+                        document.querySelector(".section-body > .card").style.opacity = '20%'
+                        const self = this;
+                        axios
+                            .get("{{ path('aws_s3_data') }}")
+                            .then(function (res) {
+
+                                self.items = res.data;
+                                document.getElementById("app").style.cursor = 'default'
+                                document.querySelector(".section-body > .card").style.opacity = '100%'
+                            });
+                    },
+                });
+            </script>
+        </twig:block>
+    </twig:Vue2>
 </div>
