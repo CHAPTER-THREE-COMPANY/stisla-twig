@@ -29,6 +29,12 @@ twig:
   date:
     timezone: Asia/Tokyo
 
+twig_component:
+  anonymous_template_directory: 'components/'
+  defaults:
+    # Namespace & directory for components
+    ChapterThree\C3Bundle\Twig\Components\: '%kernel.project_dir%/vendor/chapter-three-company/c3-bundle/templates/components/'
+
 framework:
   #  error_controller: App\Controller\Defaults\ExceptionController::showException
   ide: "phpstorm://open?file=%%f&line=%%l"
