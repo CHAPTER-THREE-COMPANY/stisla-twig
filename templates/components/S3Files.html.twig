@@ -1,57 +1,53 @@
 <div{{ attributes }}>
     <!-- component html -->
     <twig:C3:Vue2 title="ファイル共有">
-        <div class="p-3">
-            <h1>{{ title }}</h1>
-            <div id="app" class="section">
-                <div class="section-body">
-                    <div class="card">
-                        <v-app class="p-3">
-                            <v-card>
-                                <v-sheet class="pa-4 primary lighten-2">
-                                    <v-text-field
-                                            v-model="search"
-                                            label="ここに資料名の一部を入力すると検索できます。"
-                                            dark
-                                            flat
-                                            solo-inverted
-                                            hide-details
-                                            clearable
-                                            clear-icon="mdi-close-circle-outline"
-                                    ></v-text-field>
-                                </v-sheet>
-                                <v-card-text>
-                                    <v-treeview
-                                            v-model="tree"
-                                            item-key="name"
-                                            open-all
-                                            open-on-click
-                                            :items="items"
-                                            :search="search"
-                                    >
-                                        <template v-slot:label="{ item, open }">
-                                            <v-icon
-                                                    v-if="item.children"
-                                                    v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
-                                            >
-                                            </v-icon>
-                                            <v-icon
-                                                    v-else
-                                                    v-text="`${files[item.file]}`">
-                                            </v-icon>
-
-                                            <a v-bind:href="item.url" v-if="!item.children"><span v-text="item.name"></span></a>
-                                            <span v-else v-text="item.name"></span>
-                                        </template>
-                                    </v-treeview>
-                                </v-card-text>
-                            </v-card>
-                        </v-app>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <h1>{{ title }}</h1>
             </div>
-            {#    <a class="btn btn-primary" href="{{ path('homepage') }}">トップページへ戻る</a>#}
+            <v-app class="p-3">
+                <v-card>
+                    <v-sheet class="pa-4 primary lighten-2">
+                        <v-text-field
+                                v-model="search"
+                                label="ここに資料名の一部を入力すると検索できます。"
+                                dark
+                                flat
+                                solo-inverted
+                                hide-details
+                                clearable
+                                clear-icon="mdi-close-circle-outline"
+                        ></v-text-field>
+                    </v-sheet>
+                    <v-card-text>
+                        <v-treeview
+                                v-model="tree"
+                                item-key="name"
+                                open-all
+                                open-on-click
+                                :items="items"
+                                :search="search"
+                        >
+                            <template v-slot:label="{ item, open }">
+                                <v-icon
+                                        v-if="item.children"
+                                        v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
+                                >
+                                </v-icon>
+                                <v-icon
+                                        v-else
+                                        v-text="`${files[item.file]}`">
+                                </v-icon>
+
+                                <a v-bind:href="item.url" v-if="!item.children"><span v-text="item.name"></span></a>
+                                <span v-else v-text="item.name"></span>
+                            </template>
+                        </v-treeview>
+                    </v-card-text>
+                </v-card>
+            </v-app>
         </div>
+        {#    <a class="btn btn-primary" href="{{ path('homepage') }}">トップページへ戻る</a>#}
 
         <twig:block name="script">
             <script>
