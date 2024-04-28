@@ -24,15 +24,15 @@
 #  c3.ga_tracking_id: ''
 
 
-twig_component:
-  anonymous_template_directory: 'components/'
-  defaults:
-    #ChapterThree\C3Bundle\Twig\Components\: '%kernel.project_dir%/vendor/chapter-three-company/c3-bundle/templates/components/'
-    # long form
-    ChapterThree\C3Bundle\Twig\Components\:
-      #template_directory: '%kernel.project_dir%/vendor/chapter-three-company/c3-bundle/templates/components/'
-      template_directory: './components/'
-      # component names will have an extra "Pizza:" prefix
-      #    App\Pizza\Components\Alert => Pizza:Alert
-      #    App\Pizza\Components\Button\Primary => Pizza:Button:Primary
-      #name_prefix: C3
+#twig_component:
+#  anonymous_template_directory: 'components/'
+#  defaults:
+#    #ChapterThree\C3Bundle\Twig\Components\: '%kernel.project_dir%/vendor/chapter-three-company/c3-bundle/templates/components/'
+#    # long form
+#    ChapterThree\C3Bundle\Twig\Components\:
+#      #template_directory: '%kernel.project_dir%/vendor/chapter-three-company/c3-bundle/templates/components/'
+#      template_directory: './components/'
+#      # component names will have an extra "Pizza:" prefix
+#      #    App\Pizza\Components\Alert => Pizza:Alert
+#      #    App\Pizza\Components\Button\Primary => Pizza:Button:Primary
+#      #name_prefix: C3
