@@ -12,11 +12,11 @@ class Configuration implements ConfigurationInterface
     {
         // TODO: Implement getConfigTreeBuilder() method.
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('twig_component');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
-            ->booleanNode('defaults')->defaultTrue()->end()
+            ->arrayNode('defaults')->defaultTrue()->end()
 #            ->scalarNode('file')->defaultValue('')->end()
 #            ->scalarNode('alias')->defaultValue('')->end()
 #            ->scalarNode('app_id')->defaultValue('')->end()
