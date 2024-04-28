@@ -20,5 +20,5 @@
 #    '../../Resources/templates': 'c3'
 
 
-parameters:
-  c3.ga_tracking_id: ''
+#parameters:
+#  c3.ga_tracking_id: ''
