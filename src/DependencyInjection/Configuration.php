@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         // TODO: Implement getConfigTreeBuilder() method.
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('twig_component');
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
