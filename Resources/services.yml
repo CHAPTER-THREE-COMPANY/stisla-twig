@@ -19,7 +19,6 @@
 #    #'%kernel.project_dir%/vendor/chapter-three-company/stisla-twig/Resources/templates': 'c3'
 #    '../../Resources/templates': 'c3'
 
-
 #parameters:
 #  c3.ga_tracking_id: ''
 
