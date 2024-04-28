@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "730e4e9a3c7a6262e1f332861840818d",
+    "content-hash": "41b610c53c93ed4fb4dce9165654877b",
     "packages": [
         {
             "name": "composer/semver",
@@ -3159,16 +3159,16 @@
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "2.x-dev",
+            "version": "v2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "0adbcdb89335b13df410ed686a611704e8b1ab41"
+                "reference": "fb3d978b7f19e9a94533a3bf30d68269908ffae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/0adbcdb89335b13df410ed686a611704e8b1ab41",
-                "reference": "0adbcdb89335b13df410ed686a611704e8b1ab41",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/fb3d978b7f19e9a94533a3bf30d68269908ffae1",
+                "reference": "fb3d978b7f19e9a94533a3bf30d68269908ffae1",
                 "shasum": ""
             },
             "require": {
@@ -3193,7 +3193,6 @@
                 "symfony/twig-bundle": "^5.4|^6.0|^7.0",
                 "symfony/webpack-encore-bundle": "^1.15"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "thanks": {
@@ -3224,7 +3223,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/2.x"
+                "source": "https://github.com/symfony/ux-twig-component/tree/v2.17.0"
             },
             "funding": [
                 {
@@ -3240,7 +3239,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-26T15:50:12+00:00"
+            "time": "2024-04-19T16:14:05+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -3932,9 +3931,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "symfony/ux-twig-component": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
