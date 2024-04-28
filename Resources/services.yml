@@ -1,10 +1,10 @@
-services:
-  ChapterThree\C3Bundle\Command\c3ConfigCommand:
-    tags:
-      name: console.command
-      command: c3:config
-    class: ChapterThree\C3Bundle\Command\c3ConfigCommand
-    public: true
+#services:
+#  ChapterThree\C3Bundle\Command\c3ConfigCommand:
+#    tags:
+#      name: console.command
+#      command: c3:config
+#    class: ChapterThree\C3Bundle\Command\c3ConfigCommand
+#    public: true
 #
 #twig:
 #  globals:
