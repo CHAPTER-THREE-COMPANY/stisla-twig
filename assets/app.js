@@ -1,7 +1,7 @@
 "use strict";
 console.log("OK")
 
-import 'vendor/@fortawesome/fontawesome-free/css/all.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
 import 'summernote/dist/summernote-bs4.css'
