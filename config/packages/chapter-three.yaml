@@ -10,6 +10,7 @@ parameters:
 
 twig:
   paths:
+    'templates': 'C3'
   #'%kernel.project_dir%/vendor/symfony/web-profiler-bundle/Resources/views/Profiler': 'c3'
 
   globals:
