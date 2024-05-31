@@ -214,9 +214,9 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <div class="dropdown-title">最終ログイン</div>
-                        <div class="dropdown-title">{{ app.user.LastLoginDate|date("Y/m/d H:m:s") }}</div>
+                        <div class="dropdown-title">{% if app.user.LastLoginDate is defined %}{{ app.user.LastLoginDate|date("Y/m/d H:m:s") }}{% endif %}/div>
                         <div class="dropdown-title"></div>
-                        <a href="{{path('profile')}}" class="dropdown-item has-icon">
+                        <a href="/profile" class="dropdown-item has-icon">
                             <i class="far fa-user"></i> プロフィール
                         </a>
                         <a href="features-activities.html" class="dropdown-item has-icon">
