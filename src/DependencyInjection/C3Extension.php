@@ -38,10 +38,10 @@ class C3Extension extends Extension implements PrependExtensionInterface
         if (isset($bundles['framework'])) {
             $container->prependExtensionConfig('framework', ['router' => ['ChapterThree\C3Bundle\Controller\MenuController']]);
         }
-#        if (isset($bundles['TwigComponentBundle'])) {
-#            $container->prependExtensionConfig('twig_component', ['defaults' => [
-#               'ChapterThree\\C3Bundle\\Twig\\Components\\' => '@C3/templates/components/']]);
-#        }
+        if (isset($bundles['TwigComponentBundle'])) {
+            $container->prependExtensionConfig('twig_component', ['defaults' => [
+               'ChapterThree\\C3Bundle\\Twig\\Components\\' => '@C3/templates/components/']]);
+        }
 
 //        if (isset($bundles['TwigBundle'])) {
 //            $container->prependExtensionConfig('twig', ['form_themes' => ['@LiveComponent/form_theme.html.twig']]);
