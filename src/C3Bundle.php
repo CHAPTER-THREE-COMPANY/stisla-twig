@@ -17,10 +17,7 @@ class C3Bundle extends AbstractBundle
 {
     public function getContainerExtension(): ?ExtensionInterface
     {
-        if (null === $this->extension) {
-            $this->extension = new C3Extension();
-        }
-        return $this->extension;
+        return new C3Extension();
     }
 
     function execute(InputInterface $input, OutputInterface $output)
