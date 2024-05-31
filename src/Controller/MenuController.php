@@ -27,7 +27,7 @@ class MenuController extends AbstractController
         if ($this->container->has('app.menu')) {
             $menu = $this->getMenuArray($this->getParameter('app.menu'));
         }else {
-            $menu = [];
+            $menu = [['title'=>'メニュー未設定', 'url'=>'/']];
         }
 
         return $this->render('@C3/menu.html.twig', [
