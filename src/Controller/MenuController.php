@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MenuController extends AbstractController
 {
-    private $base_url;
+    private string $base_url;
 
     public function __construct(UrlGeneratorInterface $router)
     {
@@ -22,16 +22,22 @@ class MenuController extends AbstractController
     }
 
     #[Route('/menu/{page}', name: 'menu')]
-    public function index($page)
+    public function index($page): Response
     {
+        if ($this->container->has('app.menu')) {
+            $menu = $this->getMenuArray($this->getParameter('app.menu'));
+        }else {
+            $menu = [];
+        }
+
         return $this->render('@C3/menu.html.twig', [
             'page' => $page,
-            'menu' => $this->getMenuArray($this->getParameter('app.menu'))
+            'menu' => $menu
         ]);
     }
 
     #[Route('/menu/button')]
-    public function button($page)
+    public function button($page): Response
     {
         return $this->render('@C3/menu_button.html.twig', [
             'page' => $page,
@@ -46,7 +52,7 @@ class MenuController extends AbstractController
 				$menu_list[$key] = $this->getMenuArray($value);
 			}
 			if (strtolower($key) == 'url') {
-				if (substr($value, 0, 4) == 'http')
+				if (str_starts_with($value, 'http'))
 					$menu_list[$key] = $value;
 				else
 					$menu_list[$key] = $this->base_url . $value;
@@ -56,7 +62,7 @@ class MenuController extends AbstractController
     }
 
     #[Route('/menu/write', name: 'menu_write')]
-    public function write()
+    public function write(): Response
     {
         $data = [];
         //$data = $this->getMenu();
@@ -67,7 +73,7 @@ class MenuController extends AbstractController
     }
 
     #[Route('/menu/command', name: 'menu_command')]
-    public function command()
+    public function command(): Response
     {
         $kernel = $this->container->get('kernel');
         $application = new Application($kernel);
