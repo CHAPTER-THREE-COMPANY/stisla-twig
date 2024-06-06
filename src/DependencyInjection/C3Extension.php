@@ -24,9 +24,6 @@ class C3Extension extends Extension implements PrependExtensionInterface
             new FileLocator(__DIR__.'/../../config')
         );
         $loader->load('services.yaml');
-//        $loader->load('routes.yaml');
-
-
 
     }
 
