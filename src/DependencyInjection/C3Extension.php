@@ -2,17 +2,20 @@
 
 namespace ChapterThree\C3Bundle\DependencyInjection;
 
+use Exception;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 //use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class C3Extension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * @throws Exception
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         //$configuration = new Configuration();
@@ -27,7 +30,7 @@ class C3Extension extends Extension implements PrependExtensionInterface
 
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         // Register the form theme if TwigBundle is available
         $bundles = $container->getParameter('kernel.bundles');
