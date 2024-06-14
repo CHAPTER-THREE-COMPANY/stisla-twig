@@ -1,11 +1,11 @@
-<h1>Hi! Please confirm your email!</h1>
+<h1>あなたのメールアドレスが確認出来ます。</h1>
 
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    以下のリンクをクリックして、あなたのメールアドレスを正しく認証してください: <br><br>
+    <a href="{{ signedUrl|raw }}">メールアドレス確認</a>.
+    このリンクの有効期限 : {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
 <p>
-    Cheers!
+    よろしくお願い致します
 </p>
