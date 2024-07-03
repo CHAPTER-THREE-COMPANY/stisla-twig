@@ -23,7 +23,6 @@ class C3Extension extends Extension implements PrependExtensionInterface
 
         $loader = new YamlFileLoader(
             $container,
-            //new FileLocator(__DIR__.'/../../Resources')
             new FileLocator(__DIR__.'/../../config')
         );
         $loader->load('services.yaml');
