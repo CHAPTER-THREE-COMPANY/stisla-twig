@@ -45,7 +45,7 @@ class C3SetupCommand extends Command
 
         $io->title("CHAPTER-THREE SUPER BUNDLE");
 
-        $io->ask("初期設定方法を説明します[enter]");
+        $io->ask("初期設定を実行します[enter]");
 
         $filesystem = new Filesystem();
         $VENDOR = __DIR__.'/../../';
@@ -84,8 +84,7 @@ class C3SetupCommand extends Command
         $filesystem->dumpFile('importmap.php', $content);
 
 
-
-        $io->success('上記利用方法を設定してください.');
+        $io->success('設定完了しました.');
 
         return Command::SUCCESS;
     }
