@@ -115,7 +115,7 @@ class C3SetupCommand extends Command
         $io->section("コマンド実行");
         $io->ask('symfony console importmap:install');
         $application->run(new ArrayInput(['command' => 'importmap:install']), $output);
-        if ($filesystem->exists("./vendor/chapter-three-compony/c3-bundle/assets/app.js")) {
+        if ($filesystem->exists("vendor/chapter-three-company/c3-bundle/assets/app.js")) {
             $io->ask('symfony console asset-map:compile');
             $application->run(new ArrayInput(['command' => 'asset-map:compile']), $output);
         }else{
