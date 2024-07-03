@@ -3,6 +3,7 @@ parameters:
   asset.request_context.secure: true
 
   email_admin: '%env(ADMIN_EMAIL)%'
+  adminEmail: '%env(ADMIN_EMAIL)%'
   images_directory: '%kernel.project_dir%/public/uploads/images'
 
   timezone: '%env(APP_TIMEZONE)%'
@@ -13,6 +14,8 @@ parameters:
   env(SITE_NAME): "CHAPTER-THREE PRESENTS"
   env(VERSION): "Version 3.1"
   env(GA_TRACKING_ID): ""
+  env(SLACK_DSN): "slack://xoxa-2TOKEN@default?channel=CHANNEL"
+  env(ADMIN_EMAIL): 'admin@mail.mail'
 
 twig:
   paths:

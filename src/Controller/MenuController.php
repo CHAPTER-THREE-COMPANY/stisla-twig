@@ -24,7 +24,7 @@ class MenuController extends AbstractController
     #[Route('/menu/{page}', name: 'menu')]
     public function index($page): Response
     {
-        if ($this->container->has('app.menu')) {
+        if ($this->container->get('parameter_bag')->has("app.menu")) {
             $menu = $this->getMenuArray($this->getParameter('app.menu'));
         }else {
             $menu = [['title'=>'メニュー未設定', 'url'=>'/']];
