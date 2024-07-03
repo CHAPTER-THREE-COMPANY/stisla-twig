@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}お知らせ{% endblock %}
+
+{% block section_body %}
+
+    <!--h1>お知らせ</h1-->
+
+    {% set truncate = false %}
+
+    <div class="mt-4">
+        {{ include('news/_list.html.twig') }}
+    </div>
+
+
+{% endblock %}

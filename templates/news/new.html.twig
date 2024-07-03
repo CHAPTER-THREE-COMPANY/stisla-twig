@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}お知らせ管理{% endblock %}
+
+{% block body %}
+    <h3 class="mt-4">新規お知らせ</h3>
+
+    {{ include('news/_form.html.twig') }}
+
+    <a class="btn btn-primary p-2" href="{{ path('news_index') }}">リストに戻る</a>
+{% endblock %}

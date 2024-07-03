@@ -1,0 +1,62 @@
+{% block news_list %}
+
+    <ul class="list-unstyled list-unstyled-border">
+        <h3>お知らせ一覧</h3>
+        <br><br>
+        {% for news in news %}
+            <div class="card card-primary">
+                <style>
+                    .card-body a, a:visited, a:focus, a:hover {
+                        text-decoration: none;
+                    }
+                </style>
+                {% if truncate is defined and truncate == false %}
+                <a href="{{ path('news_show', {'id':news.id}) }}">
+                <div class="card-body">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" width="50" src="{{ asset('img/avatar/avatar-1.png') }}" alt="avatar">
+                        <div class="media-body">
+                            <div class="badge badge-pill badge-info mb-1 float-right">{{ news.Division }}</div>
+                            <h4 class="media-heading">{{ news.Title }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="text-lg-left text-body">{{ news.Contents|raw|nl2br }}</span>
+                </div>
+                </a>
+                {% else %}
+                <div class="card-body">
+                    <a href="{{ path('news_show', {'id':news.id}) }}">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" width="50" src="{{ asset('img/avatar/avatar-1.png') }}" alt="avatar">
+                        <div class="media-body">
+                            <div class="float-right text-primary">{{ news.Division }}</div>
+                            <div class="media-title">{{ news.Title }}</div>
+                            <span class="text-small text-muted">{{ news.Contents|striptags|u.truncate(8,"...") }}</span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="card">
+                <div class="card-body">新しいお知らせがありません</div>
+            </div>
+        {% endfor %}
+    </ul>
+    <div class="text-center pt-1 pb-1">
+        {% if truncate is defined and truncate == false  %}
+        <a href="{{ path('homepage') }}" class="btn btn-primary btn-lg btn-round">
+            TOPへ戻る
+        </a>
+        {% else %}
+        <a href="{{ path('news_index') }}" class="btn btn-primary btn-lg btn-round">
+            全てをみる
+        </a>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

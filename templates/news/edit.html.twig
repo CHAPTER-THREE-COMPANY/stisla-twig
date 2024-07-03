@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}お知らせ管理{% endblock %}
+
+{% block body %}
+    <h1>お知らせ</h1>
+
+    {{ include('news/_form.html.twig', {'button_label': '保存'}) }}
+    <div class="row pl-2">
+
+        <div class="mb-auto p-2">
+        <a class="btn btn-primary" href="{{ path('news_index') }}">リストに戻る</a>
+        </div>
+
+        <div class="mb-auto p-2">
+        {{ include('news/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
