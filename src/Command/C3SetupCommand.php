@@ -110,8 +110,16 @@ class C3SetupCommand extends Command
             $io->info("base.html.twig を編集しました.");
         }
 
+        // templates
+        // base.html.twig 編集
+        if ($io->confirm('template を追加しますか？', false)) {
+            $filesystem->copy($VENDOR. 'Resources/src/Controller/Defaults', 'src/Controller/Defaults');
+            $filesystem->copy($VENDOR. 'templates/default', 'templates/default');
+            $filesystem->copy($VENDOR. 'templates/news', 'templates/news');
+        }
 
-        $io->success('設定完了しました.');
+
+            $io->success('設定完了しました.');
 
         $io->writeln("以下の実行します.");
         $io->writeln('symfony console importmap:install');

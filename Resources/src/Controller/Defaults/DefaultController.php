@@ -3,6 +3,7 @@ namespace App;
 
 #use App\Form\RegistrationFormType;
 use ChapterThree\C3Bundle\Service\Slack;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,7 +55,7 @@ class DefaultController extends AbstractController
      *
      */
     #[Route("/profile", name: "profile")]
-    public function profile(Request $request, \App\Controller\Defaults\EntityManagerInterface $entityManager, Slack $slack)
+    public function profile(Request $request, EntityManagerInterface $entityManager, Slack $slack)
     {
         $slack->send("Test");
         $user = $this->getUser();
