@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Controller\Defaults;
 
 #use App\Form\RegistrationFormType;
 use ChapterThree\C3Bundle\Service\Slack;
