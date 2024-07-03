@@ -46,7 +46,7 @@ monolog:
 
     slack-error:
       type: slackwebhook
-      webhook_url: '' #'https://hooks.slack.com/services/*********/*********/************************'
+      webhook_url: 'https://hooks.slack.com/services/*********/*********/************************'
       channel: '#alert'
       channels: ['alert']
       #- [bot_name]: defaults to Monolog

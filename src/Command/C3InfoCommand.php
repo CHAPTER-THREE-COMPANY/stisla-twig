@@ -11,10 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'c3:install',
+    name: 'c3:info',
     description: 'c3-bundle の利用方法を説明します',
 )]
-class C3InstallCommand extends Command
+class C3InfoCommand extends Command
 {
     public function __construct()
     {

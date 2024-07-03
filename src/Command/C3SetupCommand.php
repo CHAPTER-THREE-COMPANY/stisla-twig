@@ -84,7 +84,21 @@ class C3SetupCommand extends Command
         $filesystem->dumpFile('importmap.php', $content);
 
 
+        // assets/app.js 編集
+        $appjs = $filesystem->readFile('assets/app.js');
+        if (preg_match('/^import \'\.\/styles\/app.css\';$/m', $appjs)) {
+            $appjs = str_replace("import './styles/app.css';", "//stislaデザイン用にコメントアウト\n//import './styles/app.css';", $appjs);
+            $filesystem->dumpFile('assets/app.js', $appjs);
+
+            $io->info("assets/app.js を編集しました.");
+        }
+
         $io->success('設定完了しました.');
+
+        $io->writeln("以下の実行してください.");
+        $io->writeln('symfony console importmap:install');
+        $io->writeln('symfony console asset-map:compile');
+        $io->writeln('symfony console cache:clear');
 
         return Command::SUCCESS;
     }
