@@ -11,6 +11,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
+use Symfony\Component\Finder\Finder;
 
 #[AsCommand(
     name: 'c3:setup',
@@ -43,7 +45,7 @@ class C3SetupCommand extends Command
         }
 
         $filesystem = new Filesystem();
-        $VENDOR = __DIR__.'/../../';
+        $VENDOR = Path::canonicalize(__DIR__.'/../../').'/';
         $IMPORT = $VENDOR.'importmap.php';
 
         $io->section(".yaml 設定");
@@ -113,13 +115,33 @@ class C3SetupCommand extends Command
         // templates
         // base.html.twig 編集
         if ($io->confirm('template を追加しますか？', false)) {
-            $filesystem->copy($VENDOR. 'Resources/src/Controller/Defaults', 'src/Controller/Defaults');
-            $filesystem->copy($VENDOR. 'templates/default', 'templates/default');
-            $filesystem->copy($VENDOR. 'templates/news', 'templates/news');
+            $finder = new Finder();
+
+            $io->writeln("src/Controller/Defaults");
+            $finder->files()->in($VENDOR.'Resources/src/Controller/Defaults/');
+            foreach ($finder as $file) {
+                $filesystem->copy(
+                    $VENDOR. 'Resources/src/Controller/Defaults/'.$file->getRelativePathname(),
+                    'src/Controller/Defaults/'.$file->getRelativePathname());
+            }
+            $io->writeln("templates/default");
+            $finder->files()->in($VENDOR.'templates/default/');
+            foreach ($finder as $file) {
+                $filesystem->copy(
+                    $VENDOR. 'templates/default/'.$file->getRelativePathname(),
+                    'templates/default/'.$file->getRelativePathname());
+            }
+            $io->writeln("templates/news");
+            $finder->files()->in($VENDOR.'templates/news/');
+            foreach ($finder as $file) {
+                $filesystem->copy(
+                    $VENDOR. 'templates/news/'.$file->getRelativePathname(),
+                    'templates/news/'.$file->getRelativePathname());
+            }
         }
 
 
-            $io->success('設定完了しました.');
+        $io->success('設定完了しました.');
 
         $io->writeln("以下の実行します.");
         $io->writeln('symfony console importmap:install');
