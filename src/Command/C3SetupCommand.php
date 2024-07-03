@@ -102,6 +102,15 @@ class C3SetupCommand extends Command
             }
         }
 
+        // base.html.twig 編集
+        if ($io->confirm('base.html.twig を編集しますか？', false)) {
+            $filesystem->rename('templates/base.html.twig', "templates/base.html.twig." . (date("YmdHis")));
+            $filesystem->dumpFile('templates/base.html.twig', "{% extends '@C3/base.html.twig' %}\n");
+
+            $io->info("base.html.twig を編集しました.");
+        }
+
+
         $io->success('設定完了しました.');
 
         $io->writeln("以下の実行します.");
