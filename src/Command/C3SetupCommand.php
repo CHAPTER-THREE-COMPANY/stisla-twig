@@ -48,21 +48,42 @@ class C3SetupCommand extends Command
         $io->ask("初期設定方法を説明します[enter]");
 
         $filesystem = new Filesystem();
+        $VENDOR = __DIR__.'/../../';
+        $IMPORT = $VENDOR.'importmap.php';
 
-        #if (!$filesystem->exists('vendor/chapter-three-three/c3-bundle/importmap.php')){
-        if (!$filesystem->exists('importmap2.php')){
+        if (!$filesystem->exists('config/packages/chapter-three.yaml')) {
+            $filesystem->copy($VENDOR.'Resources/config/chapter-three.yaml', 'config/packages/chapter-three.yaml');
+        }else{
+            $io->warning("config/packages/chapter-three.yaml is exist. does not copy");
+        }
+        if (!$filesystem->exists('config/packages/chapter-three_menu.yaml')) {
+            $filesystem->copy($VENDOR.'Resources/config/chapter-three_menu.yaml', 'config/packages/chapter-three_menu.yaml');
+        }else{
+            $io->warning("config/packages/chapter-three_menu.yaml is exist. does not copy");
+        }
+
+        // Check Vendor Mode
+        if (!$filesystem->exists($IMPORT)){
             $io->warning("symfony composer require chapter-three-three/c3-bundle を実行してください。");
             return Command::FAILURE;
         }
 
-        #$imp1 = include('vendor/chapter-three-three/c3-bundle/importmap.php');
-        $imp1 = include('importmap2.php');
-        $imp2 = include('importmap.php');
+        $imp2 = include($IMPORT);
+        $imp1 = include('importmap.php');
         $import = array_merge($imp1, $imp2);
 
-        $filesystem->rename('importmap.php', "importmap.php.".(date("Ymd")));
+        $filesystem->rename('importmap.php', "importmap.php.".(date("YmdHis")));
 
-        $filesystem->dumpFile('importmap.php', "<?php\nreturn ".var_export($import, true).";");
+        $export = var_export($import, TRUE);
+        $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
+        $array = preg_split("/\r\n|\n|\r/", $export);
+        $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
+        $export = join(PHP_EOL, array_filter(["["] + $array));
+        $content ="<?php\n\n\nreturn ".$export.";";
+
+        $filesystem->dumpFile('importmap.php', $content);
+
+
 
         $io->success('上記利用方法を設定してください.');
 
