@@ -12,8 +12,8 @@
  * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
-    '@C3/app' => [
-        'path' => './vendor/chapter-three-company/c3-bundle/assets/app.js',
+    'app' => [
+        'path' => 'assets/app.js',
         'entrypoint' => true,
     ],
     '@fortawesome/fontawesome-free' => [

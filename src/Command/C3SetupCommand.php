@@ -94,8 +94,8 @@ class C3SetupCommand extends Command
         // assets/app.js 編集
         if ($io->confirm('assets/app.js を編集します', false)) {
             $appjs = $filesystem->readFile('assets/app.js');
-            if (preg_match('/^import \'\.\/styles\/app.css\';$/m', $appjs)) {
-                $appjs = str_replace("import './styles/app.css';", "//stislaデザイン用にコメントアウト\n//import './styles/app.css';", $appjs);
+            if (!preg_match('/^import \'..\/vendor\/chapter-three-company\/c3-bundle\/assets\/app\.js\'$/m', $appjs)) {
+                $appjs = $appjs. "\n\n//stislaデザイン用にコメントアウト\nimport '../vendor/chapter-three-company/c3-bundle/assets/app.js';";
                 $filesystem->dumpFile('assets/app.js', $appjs);
 
                 $io->info("assets/app.js を編集しました.");
