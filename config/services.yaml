@@ -22,4 +22,4 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
+    Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader: '@asset_mapper.importmap.remote_package_downloader'

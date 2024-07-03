@@ -13,7 +13,7 @@
  */
 return [
     '@C3/app' => [
-        'path' => './vendor/chapter-three/c3-bundle/assets/app.js',
+        'path' => './vendor/chapter-three-compony/c3-bundle/assets/app.js',
         'entrypoint' => true,
     ],
     '@fortawesome/fontawesome-free' => [

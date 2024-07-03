@@ -4,6 +4,7 @@ namespace ChapterThree\C3Bundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -33,72 +34,98 @@ class C3SetupCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
-
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
-
-        if ($input->getOption('option1')) {
-            // ...
-        }
 
         $io->title("CHAPTER-THREE SUPER BUNDLE");
 
-        $io->ask("初期設定を実行します[enter]");
+        if (!$io->confirm("初期設定を実行します", true)) {
+            $io->info("処理を中止します.");
+            return Command::FAILURE;
+        }
 
         $filesystem = new Filesystem();
         $VENDOR = __DIR__.'/../../';
         $IMPORT = $VENDOR.'importmap.php';
 
-        if (!$filesystem->exists('config/packages/chapter-three.yaml')) {
-            $filesystem->copy($VENDOR.'Resources/config/chapter-three.yaml', 'config/packages/chapter-three.yaml');
-        }else{
-            $io->warning("config/packages/chapter-three.yaml is exist. does not copy");
+        $io->section(".yaml 設定");
+
+        if ($io->confirm('config/packages/chapter-three.yaml を処理します', false)) {
+            if (!$filesystem->exists('config/packages/chapter-three.yaml')) {
+                $filesystem->copy($VENDOR . 'Resources/config/chapter-three.yaml', 'config/packages/chapter-three.yaml');
+            } else {
+                $io->warning("config/packages/chapter-three.yaml is exist. does not copy");
+            }
         }
-        if (!$filesystem->exists('config/packages/chapter-three_menu.yaml')) {
-            $filesystem->copy($VENDOR.'Resources/config/chapter-three_menu.yaml', 'config/packages/chapter-three_menu.yaml');
-        }else{
-            $io->warning("config/packages/chapter-three_menu.yaml is exist. does not copy");
+
+        if ($io->confirm('config/packages/chapter-three_menu.yaml を処理します', false)) {
+            if (!$filesystem->exists('config/packages/chapter-three_menu.yaml')) {
+                $filesystem->copy($VENDOR . 'Resources/config/chapter-three_menu.yaml', 'config/packages/chapter-three_menu.yaml');
+            } else {
+                $io->warning("config/packages/chapter-three_menu.yaml is exist. does not copy");
+            }
         }
+
+        $io->section("importmap.php 設定");
 
         // Check Vendor Mode
         if (!$filesystem->exists($IMPORT)){
-            $io->warning("symfony composer require chapter-three-three/c3-bundle を実行してください。");
+            $io->warning("symfony composer require chapter-three-compony/c3-bundle を実行してください。");
             return Command::FAILURE;
         }
+        if ($io->confirm('importmap.php を編集します', false)) {
+            $imp2 = include($IMPORT);
+            $imp1 = include('importmap.php');
+            $import = array_merge($imp1, $imp2);
 
-        $imp2 = include($IMPORT);
-        $imp1 = include('importmap.php');
-        $import = array_merge($imp1, $imp2);
+            $filesystem->rename('importmap.php', "importmap.php." . (date("YmdHis")));
 
-        $filesystem->rename('importmap.php', "importmap.php.".(date("YmdHis")));
+            $export = var_export($import, TRUE);
+            $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
+            $array = preg_split("/\r\n|\n|\r/", $export);
+            $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
+            $export = join(PHP_EOL, array_filter(["["] + $array));
+            $content = "<?php\n\n\nreturn " . $export . ";";
 
-        $export = var_export($import, TRUE);
-        $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
-        $array = preg_split("/\r\n|\n|\r/", $export);
-        $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
-        $export = join(PHP_EOL, array_filter(["["] + $array));
-        $content ="<?php\n\n\nreturn ".$export.";";
+            $filesystem->dumpFile('importmap.php', $content);
+            $io->info("importmap.php を編集しました.");
+        }
 
-        $filesystem->dumpFile('importmap.php', $content);
-
+        $io->section("app.js 編集");
 
         // assets/app.js 編集
-        $appjs = $filesystem->readFile('assets/app.js');
-        if (preg_match('/^import \'\.\/styles\/app.css\';$/m', $appjs)) {
-            $appjs = str_replace("import './styles/app.css';", "//stislaデザイン用にコメントアウト\n//import './styles/app.css';", $appjs);
-            $filesystem->dumpFile('assets/app.js', $appjs);
+        if ($io->confirm('assets/app.js を編集します', false)) {
+            $appjs = $filesystem->readFile('assets/app.js');
+            if (preg_match('/^import \'\.\/styles\/app.css\';$/m', $appjs)) {
+                $appjs = str_replace("import './styles/app.css';", "//stislaデザイン用にコメントアウト\n//import './styles/app.css';", $appjs);
+                $filesystem->dumpFile('assets/app.js', $appjs);
 
-            $io->info("assets/app.js を編集しました.");
+                $io->info("assets/app.js を編集しました.");
+            }
         }
 
         $io->success('設定完了しました.');
 
-        $io->writeln("以下の実行してください.");
+        $io->writeln("以下の実行します.");
         $io->writeln('symfony console importmap:install');
         $io->writeln('symfony console asset-map:compile');
         $io->writeln('symfony console cache:clear');
+
+        $application = $this->getApplication();
+        $application->setAutoExit(false);
+
+        $io->section("コマンド実行");
+        $io->ask('symfony console importmap:install');
+        $application->run(new ArrayInput(['command' => 'importmap:install']), $output);
+        if ($filesystem->exists("./vendor/chapter-three-compony/c3-bundle/assets/app.js")) {
+            $io->ask('symfony console asset-map:compile');
+            $application->run(new ArrayInput(['command' => 'asset-map:compile']), $output);
+        }else{
+            $io->writeln('symfony console asset-map:compile');
+            $io->warning("symfony composer require chapter-three-compony/c3-bundle を実行してください。");
+        }
+        $io->ask('symfony console cache:clear');
+        $application->run(new ArrayInput(['command' => 'cache:clear']), $output);
+
+
 
         return Command::SUCCESS;
     }
