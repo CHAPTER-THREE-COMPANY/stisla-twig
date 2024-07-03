@@ -115,29 +115,22 @@ class C3SetupCommand extends Command
         // templates
         // base.html.twig 編集
         if ($io->confirm('template を追加しますか？', false)) {
-            $finder = new Finder();
+            // src : 'Resources/src/Controller/Defaults'
+            // des : 'src/Controller/Defaults'
+            $cpdir = function ($src, $des) use ($io, $VENDOR, $filesystem) {
+                $io->writeln($des);
+                $finder = new Finder();
+                $finder->files()->in($VENDOR.$src.'/');
+                foreach ($finder as $file) {
+                    $filesystem->copy(
+                        $VENDOR. $src.'/'.$file->getRelativePathname(),
+                        $des.'/'.$file->getRelativePathname());
+                }
+            };
 
-            $io->writeln("src/Controller/Defaults");
-            $finder->files()->in($VENDOR.'Resources/src/Controller/Defaults/');
-            foreach ($finder as $file) {
-                $filesystem->copy(
-                    $VENDOR. 'Resources/src/Controller/Defaults/'.$file->getRelativePathname(),
-                    'src/Controller/Defaults/'.$file->getRelativePathname());
-            }
-            $io->writeln("templates/default");
-            $finder->files()->in($VENDOR.'templates/default/');
-            foreach ($finder as $file) {
-                $filesystem->copy(
-                    $VENDOR. 'templates/default/'.$file->getRelativePathname(),
-                    'templates/default/'.$file->getRelativePathname());
-            }
-            $io->writeln("templates/news");
-            $finder->files()->in($VENDOR.'templates/news/');
-            foreach ($finder as $file) {
-                $filesystem->copy(
-                    $VENDOR. 'templates/news/'.$file->getRelativePathname(),
-                    'templates/news/'.$file->getRelativePathname());
-            }
+            $cpdir('Resources/src/Controller/Defaults', "src/Controller/Defaults");
+            $cpdir('templates/default', "templates/default");
+            $cpdir('templates/news', "templates/news");
         }
 
 
