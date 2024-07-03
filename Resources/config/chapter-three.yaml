@@ -2,7 +2,7 @@ parameters:
   router.request_context.scheme: 'https'
   asset.request_context.secure: true
 
-  email_admin: '%email_admin%'
+  email_admin: '%env(ADMIN_EMAIL)%'
   images_directory: '%kernel.project_dir%/public/uploads/images'
 
   timezone: '%env(APP_TIMEZONE)%'
