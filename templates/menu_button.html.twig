@@ -1,0 +1,41 @@
+{% set stock="" %}
+
+    {% for group in menu %}
+    <div class="card"><div class="card-body">
+      {% if stock != group.title %}
+        <h3 class="section-title card-title">{{ group.title }}</h3>
+        {% set stock = group.title %}
+      {% endif %}
+      {% if group.item is defined %}
+        <ul class="list-group  list-group-flush mb-3">
+        {% for sub in group.item %}
+          {% if sub.item is defined %}
+          <li class="list-group-item">
+            <div class="section-title"><i class="{{ sub.icon|default('fas fa-square') }}"></i> <span> {{ sub.title }}</span></div>
+              {% for item in sub.item %}
+                {% set url = item.url|default(path(item.path|default('homepage'))) %}
+                <li class="list-group-item text-center"><a class="btn btn-primary btn-icon icon-left w-75" href="{{ url }}">{{ item.title }}</a></li>
+              {% endfor %}
+          </li>
+          {% else %}
+              {% if sub.roles is not defined %}
+                  <li class="list-group-item text-center">
+                    <div><a class="btn btn-primary btn-icon icon-left w-75" href="{{ sub.url| default(path(sub.path|default('homepage'))) }}"><i class="{{ sub.icon|default('fas fa-square') }}"></i> <span>{{ sub.title }}</span></a></div>
+                  </li>
+              {% else %}
+                  {% if sub.roles|slice(0,1)=="!" and not is_granted(sub.roles|slice(1)) or is_granted(sub.roles) %}
+                      <li class="list-group-item text-center">
+                          <div><a class="btn btn-primary btn-icon icon-left w-75" href="{{ sub.url| default(path(sub.path|default('homepage'))) }}"><i class="{{ sub.icon|default('fas fa-square') }}"></i> <span>{{ sub.title }}</span></a></div>
+                      </li>
+                  {% endif %}
+              {% endif %}
+          {% endif %}
+        {% endfor %}
+        </ul>
+      {% else %}
+        <ul class="list-group  list-group-flush mb-3">
+        <li class="list-group-item text-center {{ 'active'|is_active('^blank(.*)', page)|safe }}"><a class="btn btn-primary btn-icon icon-left w-75" href="{{ group.url| default(path(group.path|default('homepage'))) }}"><i class="{{ group.icon|default('far fa-square') }}"></i> <span> {{ group.title }}</span></a></li>
+        </ul>
+      {% endif %}
+    </div></div>
+    {% endfor %}
