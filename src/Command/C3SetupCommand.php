@@ -157,19 +157,30 @@ class C3SetupCommand extends Command
         $io->ask('symfony console cache:clear');
         $application->run(new ArrayInput(['command' => 'cache:clear']), $output);
 
+        $io->section("Form Login 設定方法");
+
+        $io->title("Login 基本設定");
         $io->writeln("symfony composer require symfony/security-bundle");
         $io->writeln("symfony console make:user");
-        $io->writeln("symfony console make:migration");
-        $io->writeln("symfony console doctrine:migrations:migrate");
-        $io->writeln("symfony composer require symfonycasts/verify-email-bundle");
-        $io->writeln("symfony console make:registration-form");
-        $io->writeln("symfony console security:hash-password");
         $io->writeln("symfony console make:security:form-login");
-        $io->writeln("symfony console make:controller Login");
-        $io->writeln("src/Controller/LoginController.php 編集？");
         $io->writeln("symfony composer require symfonycasts/reset-password-bundle");
         $io->writeln("symfony console make:reset-password");
+        $io->writeln("symfony composer require symfonycasts/verify-email-bundle");
+        $io->writeln("symfony console make:registration-form");
+        $io->writeln("config/packages/messenger.yaml sync設定");
+        $io->writeln("symfony console make:migration");
+        $io->writeln("symfony console doctrine:migrations:migrate");
 
+        $io->title("Tips");
+        $io->text("Verify Email");
+        $io->text("// Messenger Server起動(メールがキューにたまって送れない場合)");
+        $io->text("symfony console messenger:consume async -vv");
+        $io->text("Password Hash 生成");
+        $io->text("symfony console security:hash-password");
+        $io->text("config/packages/security.yaml でアクセス制限");
+        $io->text("config/packages/security.yaml でアクセス制限");
+        $io->text("3つのControllerをSecurityフォルダに移行");
+        $io->text("各フォーム指定をを@C3に変更");
 
         return Command::SUCCESS;
     }
