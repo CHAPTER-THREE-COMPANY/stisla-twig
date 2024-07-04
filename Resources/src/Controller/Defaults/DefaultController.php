@@ -25,7 +25,7 @@ class DefaultController extends AbstractController
 {
     private $config;
 
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'app_home')]
     public function index(Request $request,
 //                          NewsRepository $newsRepository,
                           NotifierInterface $notifier,
