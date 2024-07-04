@@ -77,7 +77,11 @@ class MenuController extends AbstractController
                 $tmp = $this->getMenuArray($value);
                 if ($tmp == null){
                     //getMenuArrayがnullだった場合、配列行削除
-                    unset($menu_list[$key]);
+                    if (is_numeric($key)) {
+                        unset($menu_list[$key]);
+                    }else{
+                        $menu_list[$key] = null;
+                    }
                 } else {
                     //受け取り後、roles行を削ってtwigに返す
                     $menu_list[$key] = $tmp;
