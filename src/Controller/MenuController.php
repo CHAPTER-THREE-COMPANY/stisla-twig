@@ -48,9 +48,46 @@ class MenuController extends AbstractController
     private function getMenuArray($menu_list)
     {
 		foreach ($menu_list as $key=>$value){
-			if (is_array($value)){
-				$menu_list[$key] = $this->getMenuArray($value);
-			}
+            if ($key=='roles'){
+                $roles = explode(",", $value);
+
+                //メニュー指定roleチェック
+                foreach ($roles as $role){
+                    //role指定がない 終了
+                    if ($role == '') break;
+                    switch(substr($role, 0, 1)){
+                        case '!':
+                            //role除外指定
+                            if ($this->isGranted(substr($role,1))){
+                                $menu_list = null;
+                                break 2;
+                            }
+                            break;
+                        default:
+                            //role指定
+                            if (!$this->isGranted($role)){
+                                $menu_list = null;
+                                break 2;
+                            }
+                            break;
+                    }
+                }
+            }
+            if (is_array($value)){
+                $tmp = $this->getMenuArray($value);
+                if ($tmp == null){
+                    //getMenuArrayがnullだった場合、配列行削除
+                    unset($menu_list[$key]);
+                } else {
+                    //受け取り後、roles行を削ってtwigに返す
+                    $menu_list[$key] = $tmp;
+                    foreach ($tmp as $tmpKey =>  $tmpValue){
+                        if (isset($tmpValue['roles'])){
+                            unset($menu_list[$key][$tmpKey]['roles']);
+                        }
+                    }
+                }
+            }
 			if (strtolower($key) == 'url') {
 				if (str_starts_with($value, 'http'))
 					$menu_list[$key] = $value;
