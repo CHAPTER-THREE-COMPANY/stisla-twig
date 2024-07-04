@@ -157,6 +157,18 @@ class C3SetupCommand extends Command
         $io->ask('symfony console cache:clear');
         $application->run(new ArrayInput(['command' => 'cache:clear']), $output);
 
+        $io->writeln("symfony composer require symfony/security-bundle");
+        $io->writeln("symfony console make:user");
+        $io->writeln("symfony console make:migration");
+        $io->writeln("symfony console doctrine:migrations:migrate");
+        $io->writeln("symfony composer require symfonycasts/verify-email-bundle");
+        $io->writeln("symfony console make:registration-form");
+        $io->writeln("symfony console security:hash-password");
+        $io->writeln("symfony console make:security:form-login");
+        $io->writeln("symfony console make:controller Login");
+        $io->writeln("src/Controller/LoginController.php 編集？");
+        $io->writeln("symfony composer require symfonycasts/reset-password-bundle");
+        $io->writeln("symfony console make:reset-password");
 
 
         return Command::SUCCESS;
