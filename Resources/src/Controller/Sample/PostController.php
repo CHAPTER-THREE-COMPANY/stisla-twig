@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Sample\Sample;
+namespace App\Controller\Sample;
 
 use App\Entity\Sample\Post;
 use App\Form\Sample\Sample\PostType;
