@@ -196,14 +196,13 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/memo', name: 'memo')]
-    public function memoAction(Request $request)
+    public function memoAction(Request $request, EntityManagerInterface $entityManager)
     {
         $entiry = new \App\Entity\Sample\Task();
         $form = $this->createForm( str_replace('Entity', 'Form', ''.get_class($entiry)."Type"), $entiry);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entiry);
             $entityManager->flush();
 
