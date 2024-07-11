@@ -4,6 +4,8 @@ console.log("OK")
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+import 'https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css'
+
 import 'summernote/dist/summernote-bs4.css'
 import './styles/style.css';
 import './styles/components.css'
