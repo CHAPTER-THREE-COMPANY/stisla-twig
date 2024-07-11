@@ -3,7 +3,7 @@
 import $ from 'jquery';
 const jQuery = $
 window.$ = window.jQuery = $;*/
-import './provide_jquery';
+import './provide_jquery.js';
 
 (function($, window, i) {
   // Bootstrap 4 Modal

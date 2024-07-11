@@ -17,5 +17,6 @@
     "summernote",
     "\/assets\/js\/scripts.js",
     "\/assets\/js\/custom.js",
+    "\/assets\/js\/provide_jquery.js",
     "jquery"
 ]

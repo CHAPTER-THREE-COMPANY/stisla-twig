@@ -16,7 +16,11 @@
         "type": "css"
     },
     "\/assets\/js\/stisla.js": {
-        "path": "\/assets\/js\/stisla-444855a485b4b6c012809511b3a2417a.js",
+        "path": "\/assets\/js\/stisla-4634400248b310e820c3068fa444513e.js",
+        "type": "js"
+    },
+    "\/assets\/js\/provide_jquery.js": {
+        "path": "\/assets\/js\/provide_jquery-0c36aa859a44067c7dfdf7c0204b576e.js",
         "type": "js"
     },
     "\/assets\/js\/scripts.js": {
