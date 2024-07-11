@@ -23,6 +23,15 @@ import 'moment'
 import 'summernote'
 import 'https://cdn.jsdelivr.net/npm/summernote@0.8.20/src/lang/summernote-ja-JP.js'
 
+import "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"
+import "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"
+$('table.table').DataTable({
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Japanese.json"
+    },
+    order: []
+});
+
 import './js/scripts.js'
 import './js/custom.js'
 
