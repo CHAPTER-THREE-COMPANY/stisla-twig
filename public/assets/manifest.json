@@ -1,5 +1,5 @@
 {
-    "app.js": "\/assets\/app-18fd8b29bb6864b5a22351630bd4d0d1.js",
+    "app.js": "\/assets\/app-c1fd2c2c9ed5e63b0ae462f2632c774d.js",
     "fonts\/nunito-v9-latin-600.eot": "\/assets\/fonts\/nunito-v9-latin-600-d8ebec702fae692ad165344baa14e68b.eot",
     "fonts\/nunito-v9-latin-600.svg": "\/assets\/fonts\/nunito-v9-latin-600-2c81f2df311b9a2b784886a8ac026f09.svg",
     "fonts\/nunito-v9-latin-600.ttf": "\/assets\/fonts\/nunito-v9-latin-600-e0daa59834d378676afc6857767cbca6.ttf",
@@ -214,8 +214,9 @@
     "js\/page\/modules-toastr.js": "\/assets\/js\/page\/modules-toastr-6b4d787f91b4827aee7115f3ca6e9f76.js",
     "js\/page\/modules-vector-map.js": "\/assets\/js\/page\/modules-vector-map-6dbeb883b8c7e530b33b8702dd1c9493.js",
     "js\/page\/utilities-contact.js": "\/assets\/js\/page\/utilities-contact-714980232b44e1626569697aa18511c1.js",
+    "js\/provide_jquery.js": "\/assets\/js\/provide_jquery-0c36aa859a44067c7dfdf7c0204b576e.js",
     "js\/scripts.js": "\/assets\/js\/scripts-b2afa42756f2e6398ca0ba5e581f936e.js",
-    "js\/stisla.js": "\/assets\/js\/stisla-97ca1a77d468450509de1211b83928ee.js",
+    "js\/stisla.js": "\/assets\/js\/stisla-4634400248b310e820c3068fa444513e.js",
     "styles\/app.css": "\/assets\/styles\/app-713d9828d7058036a44786836080554c.css",
     "styles\/components.css": "\/assets\/styles\/components-c8192a5bda37cdd7ce9c07e4898fc76b.css",
     "styles\/custom.css": "\/assets\/styles\/custom-d780f55087ed15d57e96385760713c36.css",

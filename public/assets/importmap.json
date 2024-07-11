@@ -1,6 +1,6 @@
 {
     "app": {
-        "path": "\/assets\/app-18fd8b29bb6864b5a22351630bd4d0d1.js",
+        "path": "\/assets\/app-c1fd2c2c9ed5e63b0ae462f2632c774d.js",
         "type": "js"
     },
     "\/assets\/styles\/style.css": {
@@ -16,7 +16,11 @@
         "type": "css"
     },
     "\/assets\/js\/stisla.js": {
-        "path": "\/assets\/js\/stisla-97ca1a77d468450509de1211b83928ee.js",
+        "path": "\/assets\/js\/stisla-4634400248b310e820c3068fa444513e.js",
+        "type": "js"
+    },
+    "\/assets\/js\/provide_jquery.js": {
+        "path": "\/assets\/js\/provide_jquery-0c36aa859a44067c7dfdf7c0204b576e.js",
         "type": "js"
     },
     "\/assets\/js\/scripts.js": {
