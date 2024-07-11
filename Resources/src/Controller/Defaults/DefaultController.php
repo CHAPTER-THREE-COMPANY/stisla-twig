@@ -1,10 +1,12 @@
 <?php
 namespace App\Controller\Defaults;
 
-#use App\Form\RegistrationFormType;
+use App\Form\RegistrationFormType;
 use ChapterThree\C3Bundle\Service\Slack;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Notifier\ChatterInterface;
@@ -55,11 +57,11 @@ class DefaultController extends AbstractController
      *
      */
     #[Route("/profile", name: "profile")]
-    public function profile(Request $request, EntityManagerInterface $entityManager, Slack $slack)
+    public function profile(Request $request, EntityManagerInterface $entityManager, Slack $slack): Response
     {
         $slack->send("Test");
         $user = $this->getUser();
-        $form = $this->createForm(\App\Controller\Defaults\RegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form
             ->remove('password')
             ->remove('legal');
@@ -83,7 +85,7 @@ class DefaultController extends AbstractController
      * @Route("/run", name="run")
      */
     #[Route('/run', name: 'run')]
-    public function runAction(Request $request)
+    public function runAction(Request $request): Response
     {
         $repo_key = $request->get('repo_key');
         if(!empty($request->get('code'))) {
@@ -126,7 +128,7 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/eval', name: 'eval')]
-    public function evalAction(Request $request)
+    public function evalAction(Request $request): Response
     {
         error_reporting(-1);
         ini_set('display_errors', 'on');
@@ -169,7 +171,7 @@ class DefaultController extends AbstractController
                     return new Response($buffer);
                 }
 
-            } catch ( \Exception $ex ) {
+            } catch ( Exception $ex ) {
                 return new Response($ex->getMessage());
             }
 
@@ -177,7 +179,7 @@ class DefaultController extends AbstractController
 
         return new Response('');
     }
-    private function getErrorName($errorInt)
+    private function getErrorName($errorInt): string
     {
         $errortypes = array(
             E_ERROR => 'error',
@@ -216,8 +218,12 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $page
+     * @return RedirectResponse|Response
+     */
     #[Route('/demo/{page}', name: 'etc', defaults: ['page'=>'index.html'], requirements: ['page'=>'^(?!task|orders).+'])]
-    public function etcAction($page)
+    public function etcAction($page): RedirectResponse|Response
     {
         if (in_array(substr($page,0,4) ,['task','orde'])){
             //return new Response('task:'.str_replace('/','',$page));
