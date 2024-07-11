@@ -6,7 +6,7 @@
  * Time: 00:46
  */
 
-namespace App\Controller\Sample\Sample;
+namespace App\Controller\Sample;
 
 use App\Entity\Sample\Task;
 use App\Form\Sample\Sample\TaskType;
