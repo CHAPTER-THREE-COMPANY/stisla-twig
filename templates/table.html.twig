@@ -99,3 +99,16 @@
 </section>
 {% endblock %}
 
+{% block page_js %}
+<script>
+    if (typeof jQuery !== 'undefined'){
+        console.log("table.table Settings")
+        $('table.table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Japanese.json"
+            },
+            order: []
+        });
+    }
+</script>
+{% endblock %}
