@@ -117,7 +117,7 @@ class C3SetupCommand extends Command
         if ($io->confirm('template を追加しますか？', false)) {
             // src : 'Resources/src/Controller/Defaults'
             // des : 'src/Controller/Defaults'
-            $cpdir = function ($src, $des) use ($io, $VENDOR, $filesystem) {
+            $CopyDir = function ($src, $des) use ($io, $VENDOR, $filesystem) {
                 $io->writeln($des);
                 $finder = new Finder();
                 $finder->files()->in($VENDOR.$src.'/');
@@ -128,9 +128,14 @@ class C3SetupCommand extends Command
                 }
             };
 
-            $cpdir('Resources/src/Controller/Defaults', "src/Controller/Defaults");
-            $cpdir('templates/default', "templates/default");
-            $cpdir('templates/news', "templates/news");
+            $CopyDir('Resources/src/Controller/Defaults', "src/Controller/Defaults");
+            $CopyDir('templates/news', "templates/news");
+            $CopyDir('templates/default', "templates/default");
+            $CopyDir('templates/sample', "templates/sample");
+            $CopyDir('Resources/src/Controller/Sample', "src/Controller/Sample");
+            $CopyDir('Resources/src/Entity/Sample', "src/Entity/Sample");
+            $CopyDir('Resources/src/Repository/Sample', "src/Repository/Sample");
+            $CopyDir('Resources/src/Form/Sample', "src/Form/Sample");
         }
 
 
@@ -167,20 +172,21 @@ class C3SetupCommand extends Command
         $io->writeln("symfony console make:reset-password");
         $io->writeln("symfony composer require symfonycasts/verify-email-bundle");
         $io->writeln("symfony console make:registration-form");
-        $io->writeln("config/packages/messenger.yaml sync設定");
+        $io->writeln("config/packages/messenger.yaml sync設定(3カ所)");
         $io->writeln("symfony console make:migration");
         $io->writeln("symfony console doctrine:migrations:migrate");
 
-        $io->title("Tips");
+        $io->ask("ToDo");
+        $io->text("config/packages/security.yaml でアクセス制限");
+        $io->text("3つのControllerをSecurityフォルダに移行");
+        $io->text("各フォーム指定をを@C3に変更");
+
+        $io->ask("Tips");
         $io->text("Verify Email");
         $io->text("// Messenger Server起動(メールがキューにたまって送れない場合)");
         $io->text("symfony console messenger:consume async -vv");
         $io->text("Password Hash 生成");
         $io->text("symfony console security:hash-password");
-        $io->text("config/packages/security.yaml でアクセス制限");
-        $io->text("config/packages/security.yaml でアクセス制限");
-        $io->text("3つのControllerをSecurityフォルダに移行");
-        $io->text("各フォーム指定をを@C3に変更");
 
         return Command::SUCCESS;
     }

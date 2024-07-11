@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %}Task{% endblock %}
+{% block description %}Task Description{% endblock %}
+{% block description_contents %}Task Description Contents{% endblock %}
+{% block page_title %}Page Title{% endblock %}
+{% block page_sub_title %}Page Sub Title{% endblock %}
+{% block page_icon %}far fa-address-card{% endblock %}
+
+{% set page = 'index.html' %}
+{#% set body=false %#}
+{% block plugins_css %}
+    <!--link rel="stylesheet" href="/node_modules/jqvmap/dist/jqvmap.min.css"-->
+    <!--link rel="stylesheet" href="/node_modules/weathericons/css/weather-icons.min.css"-->
+    <!--link rel="stylesheet" href="../node_modules/weathericons/css/weather-icons-wind.min.css"-->
+    <!--link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css"-->
+{% endblock %}
+
+{% block body %}
+    <div class="card col-6">
+        <div class="card-header">
+            <p><a class="btn btn-secondary" href="{{ url('task_new') }}">新規追加</a></p>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <th><a href="">{{ row.id }}</a></th>
+                        <td>{{ row.title }}
+                        <div class="table-links">{% if row.dueDate %}{{ row.duedate.format('Y/m/d') }}{% endif %}</div>
+                        </td>
+                        <td>
+                            <span>
+                            <a id="edit" href="{{ url('task_edit',{'id': row.id}) }}" class="btn btn-primary mr-1" data-toggle="tooltip" title="" data-original-title="編集"><i class="fas fa-pencil-alt"></i></a>
+                            </span>
+                            <!--a href="#editDialog" class="btn btn-primary btn-action mr-1 trigger--fire-modal-1" data-toggle="tooltip" title="" data-original-title="編集"><i class="fas fa-pencil-alt"></i></a-->
+                            <!--a href="{{ url('task_delete',{'id': row.id}) }}" class="btn btn-danger btn-action trigger--fire-modal-1" data-toggle="tooltip" title="" data-confirm="本当に削除してよろしいですか?|この処理は元に戻せません. 削除処理を続けますか?" data-confirm-yes="alert('Deleted')" data-original-title="削除"><i class="fas fa-trash"></i></a-->
+                            <!--a href="{{ url('task_delete',{'id': row.id}) }}" class="btn btn-danger btn-action trigger--fire-modal-1" data-toggle="tooltip" title="" onclick="return confirm('本当に削除してよろしいですか?|この処理は元に戻せません. 削除処理を続けますか?');" data-original-title="削除"><i class="fas fa-trash"></i></a-->
+                            <a id="delete" href="" class="btn btn-danger btn-action trigger--fire-modal-1" data-confirm-yes="location.href='{{ url('task_delete',{'id': row.id, '_token': csrf_token('delete' ~ row.id)}) }}'" data-toggle="tooltip" data-confirm="本当に削除してよろしいですか?|この処理は元に戻せません. 削除処理を続けますか?" data-original-title="削除"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--div class="modal fade" id="editDialog">
+        <div class="modal-dialog"><div class="modal-content">
+                <div class="modal-header">
+                    <h4>編集してよろしいですか？</h4>
+                </div>
+                <div class="modal-body">データを編集します。本当によろしいですか？</div>
+                <div class="modal-footer">
+                    <a href="{{ url('task_edit',{'id': 5}) }}" class="btn btn-danger">はい</a>
+                    <button class="btn" data-dismiss="modal">いいえ</button>
+                </div>
+        </div></div>
+    </div-->
+{% endblock %}

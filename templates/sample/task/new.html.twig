@@ -1,0 +1,58 @@
+{% set title = 'General Dashboard' %}
+{% set page = 'index.html' %}
+{% extends 'base.html.twig' %}
+
+{% block plugins_css %}
+    <!--link rel="stylesheet" href="/node_modules/jqvmap/dist/jqvmap.min.css"-->
+    <!--link rel="stylesheet" href="/node_modules/weathericons/css/weather-icons.min.css"-->
+    <!--link rel="stylesheet" href="../node_modules/weathericons/css/weather-icons-wind.min.css"-->
+    <!--link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css"-->
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="section-header">
+            <h1>appDashboard</h1>
+        </div>
+        <div class="section-body">
+            <div class="section-title"><h2>Task</h2></div>
+            <p class="section-lead">Task DB Tutorial</p>
+            <div class="row">
+
+                <div class="card">
+                    {{ form_start(form) }}
+
+                    <div class="card-header">
+                        {{ form.task.vars.id }}
+                        {{ form.task.vars.full_name }}
+                        {#{ form_row(form.id) }#}
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            {{ form_label(form.title, 'タイトル変更') }}
+                            {{ form_errors(form.title) }}
+                            {{ form_widget(form.title) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.task, '内容') }}
+                            {{ form_errors(form.task) }}
+                            {{ form_widget(form.task) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_row(form.dueDate) }}
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        {{ form_widget(form.save) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
