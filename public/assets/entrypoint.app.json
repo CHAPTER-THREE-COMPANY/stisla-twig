@@ -2,6 +2,7 @@
     "@fortawesome\/fontawesome-free\/css\/all.min.css",
     "bootstrap\/dist\/css\/bootstrap.min.css",
     "bootstrap-datepicker\/dist\/css\/bootstrap-datepicker.min.css",
+    "bootstrap-social\/bootstrap-social.min.css",
     "summernote\/dist\/summernote-bs4.css",
     "\/assets\/styles\/style.css",
     "\/assets\/styles\/components.css",
