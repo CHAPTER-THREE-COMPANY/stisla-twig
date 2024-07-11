@@ -3,7 +3,7 @@
 namespace App\Controller\Sample;
 
 use App\Entity\Sample\Post;
-use App\Form\Sample\Sample\PostType;
+use App\Form\Sample\PostType;
 use App\Repository\Sample\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
