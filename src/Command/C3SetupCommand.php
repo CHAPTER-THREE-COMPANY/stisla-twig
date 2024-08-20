@@ -165,6 +165,7 @@ class C3SetupCommand extends Command
         $io->section("Form Login 設定方法");
 
         $io->title("Login 基本設定");
+        $io->writeln("symfony composer require symfony/apache-pack");
         $io->writeln("symfony composer require symfony/security-bundle");
         $io->writeln("symfony console make:user");
         $io->writeln("symfony console make:security:form-login");
