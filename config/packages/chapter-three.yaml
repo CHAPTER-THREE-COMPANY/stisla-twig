@@ -9,6 +9,10 @@ parameters:
   env(GA_TRACKING_ID): ''
 
 twig:
+  # form_themes: ['foundation_5_layout.html.twig']
+  # form_themes: ['bootstrap_4_horizontal_layout.html.twig']
+  form_themes: [ 'bootstrap_4_layout.html.twig' ]
+
   paths:
     'templates': 'C3'
   #'%kernel.project_dir%/vendor/symfony/web-profiler-bundle/Resources/views/Profiler': 'c3'
