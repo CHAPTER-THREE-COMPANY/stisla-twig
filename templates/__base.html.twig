@@ -47,7 +47,7 @@
 
 </head>
 
-<body data-turbo="{{ turbo }}">
+<body data-turbo="{% if turbo %}true{% else %}false{% endif %}">
   <div id="app">
 {% block app %}{% endblock %}
   </div>
