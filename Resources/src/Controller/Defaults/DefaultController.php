@@ -51,11 +51,11 @@ class DefaultController extends AbstractController
         $message = $request->query->get('entity');
         //echo "<pre>{$message}</pre>";
 
-        if ($userRepository->findByNoneRoleUsers()){
-            $this->addFlash('warning', '<a href="'.$this->generateUrl("app_user_index").'">承認が必要なユーザーがいます。<br />クリックして承認してください</a>');
-        }
-
         if ($this->isGranted('ROLE_USER')) {
+            if ($userRepository->findByNoneRoleUsers()){
+                $this->addFlash('warning', '<a href="'.$this->generateUrl("app_user_index").'">承認が必要なユーザーがいます。<br />クリックして承認してください</a>');
+            }
+
             return $this->render('defaults/main/index.html.twig'
                 ,array(
                     'news' => null, //$newsRepository->findNews(),
@@ -104,8 +104,7 @@ class DefaultController extends AbstractController
 
         return $this->render(
             "defaults/main/profile.html.twig", [
-                'form' => $form->createView(),
-                'turbo' => false
+                'form' => $form->createView()
             ]
         );
     }
