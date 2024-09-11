@@ -46,34 +46,35 @@ class MenuController extends AbstractController
 
     private function getMenuArray($menu_list)
     {
-		foreach ($menu_list as $key=>$value){
-            if ($key=='roles'){
-                $roles = explode(",", $value);
+        if (!empty($menu_list['title'])) {
+            if (!array_key_exists('roles', $menu_list)) $menu_list['roles'] = "ROLE_USER";
+            $roles = explode(",", $menu_list['roles']);
 
-                //メニュー指定roleチェック
-                foreach ($roles as $role){
-                    //role指定がない 終了
-                    if ($role == '') {
-                        $role = 'ROLE_USER';
-                    };
-                    switch(substr($role, 0, 1)){
-                        case '!':
-                            //role除外指定
-                            if ($this->isGranted(substr($role,1))){
-                                $menu_list = null;
-                                break 2;
-                            }
-                            break;
-                        default:
-                            //role指定
-                            if (!$this->isGranted($role)){
-                                $menu_list = null;
-                                break 2;
-                            }
-                            break;
-                    }
+            //メニュー指定roleチェック
+            foreach ($roles as $role){
+                //role指定がない 終了
+                if ($role == '') {
+                    $role = 'ROLE_USER';
+                };
+                switch(substr($role, 0, 1)){
+                    case '!':
+                        //role除外指定
+                        if ($this->isGranted(substr($role,1))){
+                            $menu_list = null;
+                            break 2;
+                        }
+                        break;
+                    default:
+                        //role指定
+                        if (!$this->isGranted($role)){
+                            $menu_list = null;
+                            break 2;
+                        }
+                        break;
                 }
             }
+        }
+        if ($menu_list) foreach ($menu_list as $key=>$value){
             if (is_array($value)){
                 $tmp = $this->getMenuArray($value);
                 if ($tmp == null){
@@ -93,13 +94,13 @@ class MenuController extends AbstractController
                     }
                 }
             }
-			if (strtolower($key) == 'url') {
-				if (str_starts_with($value, 'http'))
-					$menu_list[$key] = $value;
-				else
-					$menu_list[$key] = $this->base_url . $value;
-			}
-		}
+            if (strtolower($key) == 'url') {
+                if (str_starts_with($value, 'http'))
+                    $menu_list[$key] = $value;
+                else
+                    $menu_list[$key] = $this->base_url . $value;
+            }
+        }
         return $menu_list;
     }
 
@@ -132,7 +133,6 @@ class MenuController extends AbstractController
         $content = $output->fetch();
 
         // return new Response(""), if you used NullOutput()
-        dump($content);
 
         return $this->render('@C3/defaults/main/index.html.twig');
     }
