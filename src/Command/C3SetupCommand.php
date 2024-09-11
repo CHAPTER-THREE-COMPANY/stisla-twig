@@ -130,7 +130,7 @@ class C3SetupCommand extends Command
 
             $CopyDir('Resources/src/Controller/Defaults', "src/Controller/Defaults");
             $CopyDir('templates/news', "templates/news");
-            $CopyDir('templates/default', "templates/default");
+            $CopyDir('templates/defaults', "templates/defaults");
             $CopyDir('templates/media', "templates/media");
             $CopyDir('templates/sample', "templates/sample");
             $CopyDir('Resources/src/Controller/Sample', "src/Controller/Sample");

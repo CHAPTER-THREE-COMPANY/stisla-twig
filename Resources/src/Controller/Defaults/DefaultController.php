@@ -43,7 +43,7 @@ class DefaultController extends AbstractController
         $message = $request->query->get('entity');
         //echo "<pre>{$message}</pre>";
 
-        return $this->render('default/index.html.twig'
+        return $this->render('defaults/main/index.html.twig'
             ,array(
                 'news' => null, //$newsRepository->findNews(),
                 //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
@@ -73,7 +73,7 @@ class DefaultController extends AbstractController
         }
 
         return $this->render(
-            "default/profile.html.twig", [
+            "defaults/main/profile.html.twig", [
                 'form' => $form->createView()
             ]
         );
@@ -120,7 +120,7 @@ class DefaultController extends AbstractController
         $result = "";
 //        echo '</pre>';
 
-        return $this->render('default/run.html.twig',array(
+        return $this->render('defaults/main/run.html.twig',array(
             'repo_key'=> $repo_key,
             'keyword' => $keyword,
             'result' => $result,
@@ -212,7 +212,7 @@ class DefaultController extends AbstractController
         }
 
 
-        return $this->render('default/memo.html.twig',[
+        return $this->render('defaults/main/memo.html.twig',[
             'body'=>true,
             'form'=>$form->createView()
         ]);

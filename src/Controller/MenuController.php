@@ -134,7 +134,7 @@ class MenuController extends AbstractController
         // return new Response(""), if you used NullOutput()
         dump($content);
 
-        return $this->render('@C3/default/index.html.twig');
+        return $this->render('@C3/defaults/main/index.html.twig');
     }
 
 }
