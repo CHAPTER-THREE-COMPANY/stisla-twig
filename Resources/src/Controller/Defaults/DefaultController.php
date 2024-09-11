@@ -104,7 +104,8 @@ class DefaultController extends AbstractController
 
         return $this->render(
             "defaults/main/profile.html.twig", [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'turbo' => false
             ]
         );
     }
