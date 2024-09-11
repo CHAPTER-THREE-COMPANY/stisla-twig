@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}佼成合唱団 資料(団員専用){% endblock %}
+
+{% block body %}
+<style>
+</style>
+
+<div class="card">
+    <h1 class="card-header">✅ 合唱団資料</h1>
+
+    <ul>
+        {% for key, value in data %}
+            {% if  value['div'] == 'dir' %}
+            <li>{{ value['Key'] }}</li>
+            {% else %}
+            <li><a href="{{ value['url'] }}">{{ value['Key'] }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+    <a class="btn btn-primary" href="{{ path('homepage') }}">トップページへ戻る</a>
+{% endblock %}

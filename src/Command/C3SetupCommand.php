@@ -50,7 +50,7 @@ class C3SetupCommand extends Command
 
         $io->section(".yaml 設定");
 
-        if ($io->confirm('config/packages/chapter-three.yaml を処理します', false)) {
+        if ($io->confirm('config/packages/chapter-three.yaml の新規処理します', false)) {
             if (!$filesystem->exists('config/packages/chapter-three.yaml')) {
                 $filesystem->copy($VENDOR . 'Resources/config/chapter-three.yaml', 'config/packages/chapter-three.yaml');
             } else {
@@ -58,7 +58,7 @@ class C3SetupCommand extends Command
             }
         }
 
-        if ($io->confirm('config/packages/chapter-three_menu.yaml を処理します', false)) {
+        if ($io->confirm('config/packages/chapter-three_menu.yaml を新規処理します', false)) {
             if (!$filesystem->exists('config/packages/chapter-three_menu.yaml')) {
                 $filesystem->copy($VENDOR . 'Resources/config/chapter-three_menu.yaml', 'config/packages/chapter-three_menu.yaml');
             } else {
@@ -131,6 +131,7 @@ class C3SetupCommand extends Command
             $CopyDir('Resources/src/Controller/Defaults', "src/Controller/Defaults");
             $CopyDir('templates/news', "templates/news");
             $CopyDir('templates/default', "templates/default");
+            $CopyDir('templates/media', "templates/media");
             $CopyDir('templates/sample', "templates/sample");
             $CopyDir('Resources/src/Controller/Sample', "src/Controller/Sample");
             $CopyDir('Resources/src/Entity/Sample', "src/Entity/Sample");

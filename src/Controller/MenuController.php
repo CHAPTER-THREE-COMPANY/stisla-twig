@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Routing\Attribute\Route;
@@ -26,7 +25,7 @@ class MenuController extends AbstractController
     {
         if ($this->container->get('parameter_bag')->has("app.menu")) {
             $menu = $this->getMenuArray($this->getParameter('app.menu'));
-        }else {
+        }else{
             $menu = [['title'=>'メニュー未設定', 'url'=>'/']];
         }
 
@@ -54,7 +53,9 @@ class MenuController extends AbstractController
                 //メニュー指定roleチェック
                 foreach ($roles as $role){
                     //role指定がない 終了
-                    if ($role == '') break;
+                    if ($role == '') {
+                        $role = 'ROLE_USER';
+                    };
                     switch(substr($role, 0, 1)){
                         case '!':
                             //role除外指定

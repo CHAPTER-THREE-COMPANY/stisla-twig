@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}社員証登録{% endblock %}
+{% block sub_title %}社員証画像登録{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper ul { list-style:square }
+</style>
+<div class="example-wrapper">
+    <h1>画像を登録 ✅</h1>
+
+    <p>本確定まで社員証の画像は何度でも取り直しが可能です。
+        一部のAndroidの場合は予め保存した画像をアップロードしてください:</p>
+    <ul>
+        <li style="list-style: none">　</li>
+        <li>画像登録<input class="btn" value="画像を選択" type="file" accept="image/*" id="upfile_image"></li>
+        <img id="thumbnail_imagethu" src="">
+        <li style="list-style: none">　</li>
+        <li>動画登録<input class="btn" value="動画を選択" type="file" accept="video/*" id="upfile_video"></li>
+        <img id="thumbnail_video" src="">
+        <li style="list-style: none">　</li>
+
+    </ul>
+
+    <input class="btn btn-primary" value="仮登録">
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+    function takePicture()
+    {
+        alert("写真をとります");
+        // カメラ準備
+        var options = {
+            destinationType: Camera.DestinationType.DATA_URL,
+            encodingType: 0     // 0=JPG 1=PNG
+        };
+
+        // カメラ起動
+        navigator.camera.getPicture(onSuccess, onFail, options);
+
+        // 成功時処理
+        function onSuccess (imageData) {
+            // Blobを作成
+            var byteCharacters = toBlob(imageData);
+
+            // Azureに画像データを送る関数
+            azureFunc(byteCharacters);
+        }
+
+        // エラー時処理
+        function onFail (message) {
+            console.log (message);
+        }
+
+        // Blob作成関数
+        function toBlob(base64) {
+            var blob;
+            var bin = atob(base64.replace(/^.*,/, ''));
+            var buffer = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) {
+                buffer[i] = bin.charCodeAt(i);
+            }
+            // Blobを作成
+            try{
+                blob = new Blob([buffer.buffer], {
+                    type: 'image/png'
+                });
+            }catch (e){
+                return false;
+            }
+            return blob;
+        }
+    }
+
+    $('#upfile_image').change(function(){
+        if (this.files.length > 0) {
+            // 選択されたファイル情報を取得
+            var file = this.files[0];
+
+            // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function() {
+                $('#thumbnail_image').attr('src', reader.result );
+            }
+        }
+    });
+    $('#upfile_video').change(function(){
+        if (this.files.length > 0) {
+            // 選択されたファイル情報を取得
+            var file = this.files[0];
+
+            // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function() {
+                $('#thumbnail').attr('src', reader.result );
+            }
+        }
+    });
+</script>
+{% endblock %}

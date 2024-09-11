@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}佼成合唱団 資料(団員専用){% endblock %}
+
+{% block body %}
+
+
+<div class="p-3">
+    <h1>✅ 合唱団資料</h1>
+
+    <v-app class="p-3">
+    <v-card>
+        <v-sheet class="pa-4 primary lighten-2">
+            <v-text-field
+                    v-model="search"
+                    label="ここに資料名の一部を入力すると検索できます。"
+                    dark
+                    flat
+                    solo-inverted
+                    hide-details
+                    clearable
+                    clear-icon="mdi-close-circle-outline"
+            ></v-text-field>
+        </v-sheet>
+        <v-card-text>
+            <v-treeview
+                    v-model="tree"
+                    item-key="name"
+                    open-all
+                    open-on-click
+                    :items="items"
+                    :search="search"
+            >
+                <template v-slot:label="{ item, open }">
+                    <v-icon
+                        v-if="item.children"
+                        v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
+                    >
+                    </v-icon>
+                    <v-icon
+                        v-else
+                        v-text="`${files[item.file]}`">
+                    </v-icon>
+
+                    <a v-bind:href="item.url" v-if="!item.children"><span v-text="item.name"></span></a>
+                    <span v-else v-text="item.name"></span>
+                </template>
+            </v-treeview>
+        </v-card-text>
+    </v-card>
+    </v-app>
+
+    <a class="btn btn-primary" href="{{ path('homepage') }}">トップページへ戻る</a>
+
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+    var app = new Vue({
+        el: '#app',
+        delimiter: ['{$', '}}'],
+        vuetify: new Vuetify(),
+        data: () => ({
+            items: [],
+            tree: [],
+            search: null,
+            files: {
+                html: 'mdi-language-html5',
+                js: 'mdi-nodejs',
+                json: 'mdi-code-json',
+                md: 'mdi-language-markdown',
+                pdf: 'mdi-file-pdf-outline',
+                mp3: 'mdi-music',
+                mp4: 'mdi-video-outline',
+                m4v: 'mdi-video-outline',
+                png: 'mdi-file-image',
+                jpg: 'mdi-file-image',
+                txt: 'mdi-file-document-outline',
+                xls: 'mdi-file-excel',
+                xlsm: 'mdi-file-excel',
+                iso: 'mdi-disc'
+            },
+        }),
+        mounted: function ()  {
+            document.getElementById("app").style.cursor = 'wait'
+            document.querySelector(".section-body > .card").style.opacity = '20%'
+            const self = this;
+            axios
+                .get("{{ path('aws_s3_data') }}")
+                .then(function (res) {
+                    self.items = res.data;
+                    document.getElementById("app").style.cursor = 'default'
+                    document.querySelector(".section-body > .card").style.opacity = '100%'
+            });
+        },
+    });
+</script>
+{% endblock %}
+
+
+{% block plugins_css %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block importmap %}{% endblock %}
+
+{% block plugins_js %}
+    {{ importmap('app') }}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
