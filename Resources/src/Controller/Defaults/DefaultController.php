@@ -69,7 +69,7 @@ class DefaultController extends AbstractController
             }else{
                 return $this->render('defaults/main/none.html.twig'
                     ,array(
-                        'news' => "必要な登録は完了いたしました。<br>承認されるまで、今しばらくお待ちください。",
+                        'news' => "必要な登録は完了いたしました。<br>メンバーに承認されるまで、今しばらくお待ちください。",
                         //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
                         'body'=>true,
                     )
