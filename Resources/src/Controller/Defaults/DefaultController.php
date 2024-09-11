@@ -99,7 +99,7 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('info', '登録しました。');
+            $this->addFlash('info', '登録しました。<script>setTimeout(() => {location.reload();}, 5000);</script>');
         }
 
         return $this->render(
