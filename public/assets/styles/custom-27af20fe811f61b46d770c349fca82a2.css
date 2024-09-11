@@ -1,0 +1,48 @@
+
+body {
+    background-color: lightgray;
+    font-family : "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "Gulim", "arial", Osaka, メイリオ, sans-serif;
+}
+
+
+textarea.form-control {
+    min-height: 120px; }
+
+
+.table:not(.table-sm):not(.table-md):not(.dataTable) td {
+        font-weight: initial;
+}
+.table:not(.table-sm):not(.table-md):not(.dataTable) td, th {
+        min-height: 60px;
+        height: auto;
+        padding-bottom: 30px;
+}
+
+
+@media (max-width: 1024px) {
+    .main-wrapper-1 .section .section-header {
+        margin-left: inherit;
+        margin-right: inherit;}
+    .main-content {
+        padding-left: inherit;
+        padding-right: inherit;}
+}
+
+.section-body .card iframe {
+		max-width: 100%;
+}
+
+div.modal-backdrop.show {
+    z-index: auto;
+}
+
+/* 点滅 */
+@keyframes blinking {
+    0% {opacity: 0;}
+    30% {opacity: 0.9;}
+    100% {opacity: 1;}
+}
+/* 要素にアニメーションを適用 */
+.blink {
+    animation: blinking 3s ease-in-out infinite alternate;
+}
