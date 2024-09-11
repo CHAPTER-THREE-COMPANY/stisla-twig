@@ -2,10 +2,11 @@
 namespace App\Controller\Defaults;
 
 use App\Form\RegistrationFormType;
-use ChapterThree\C3Bundle\Service\Slack;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +22,22 @@ use Symfony\Component\Routing\Attribute\Route;
 //use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/')]
+#[Route('/', name: 'app_')]
 ##[IsGranted("ROLE_USER")]
 class DefaultController extends AbstractController
 {
     private $config;
 
-    #[Route('/', name: 'app_home')]
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    )
+    {
+    }
+
+    #[Route('/', name: 'home')]
     public function index(Request $request,
-//                          NewsRepository $newsRepository,
+//            NewsRepository $newsRepository,
+                          UserRepository $userRepository,
                           NotifierInterface $notifier,
                           ChatterInterface $chatter
     )
@@ -43,13 +51,31 @@ class DefaultController extends AbstractController
         $message = $request->query->get('entity');
         //echo "<pre>{$message}</pre>";
 
-        return $this->render('defaults/main/index.html.twig'
-            ,array(
-                'news' => null, //$newsRepository->findNews(),
-                //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-                'body'=>true,
-            )
-        );
+        if ($userRepository->findByNoneRoleUsers()){
+            $this->addFlash('warning', '<a href="'.$this->generateUrl("app_user_index").'">承認が必要なユーザーがいます。<br />クリックして承認してください</a>');
+        }
+
+        if ($this->isGranted('ROLE_USER')) {
+            return $this->render('defaults/main/index.html.twig'
+                ,array(
+                    'news' => null, //$newsRepository->findNews(),
+                    //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+                    'body'=>true,
+                )
+            );
+        }else{
+            if ($this->getUser()->getFullname() == ""){
+                return $this->forward("App\Controller\Defaults\DefaultController::profile");
+            }else{
+                return $this->render('defaults/main/none.html.twig'
+                    ,array(
+                        'news' => "必要な登録は完了いたしました。<br>承認されるまで、今しばらくお待ちください。",
+                        //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+                        'body'=>true,
+                    )
+                );
+            }
+        }
     }
 
     /**
@@ -57,18 +83,22 @@ class DefaultController extends AbstractController
      *
      */
     #[Route("/profile", name: "profile")]
-    public function profile(Request $request, EntityManagerInterface $entityManager, Slack $slack): Response
+    public function profile(Request $request): Response
     {
-        $slack->send("Test");
         $user = $this->getUser();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user, ['label'=>'プロフィール編集']);
+        $field = $form->get("agreeTerms");
         $form
-            ->remove('password')
-            ->remove('legal');
+            ->remove('plainPassword')
+            ->remove('agreeTerms');
+        $form
+            ->add("fullname",TextType::class,['label'=>'フルネーム'])
+            ->add($field)
+        ;
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
             $this->addFlash('info', '登録しました。');
         }
 
@@ -80,10 +110,6 @@ class DefaultController extends AbstractController
     }
 
 
-
-    /**
-     * @Route("/run", name="run")
-     */
     #[Route('/run', name: 'run')]
     public function runAction(Request $request): Response
     {
