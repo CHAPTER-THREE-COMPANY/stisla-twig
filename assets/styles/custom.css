@@ -39,9 +39,10 @@ div.modal-backdrop.show {
 /* 点滅 */
 @keyframes blinking {
     0% {opacity: 0;}
+    30% {opacity: 0.9;}
     100% {opacity: 1;}
 }
 /* 要素にアニメーションを適用 */
 .blink {
-    animation: blinking 1s ease-in-out infinite alternate;
+    animation: blinking 3s ease-in-out infinite alternate;
 }

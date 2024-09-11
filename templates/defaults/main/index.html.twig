@@ -16,17 +16,19 @@
         <div class="row ml-0 mr-0">
             <div class="col-lg-6 col-md-6 col-12 pl-0 pr-0">
 
-                {{ include('default/flashbags.html.twig') }}
+                {{ include('defaults/main/flashbags.html.twig') }}
 
-                <div class="card">
-                    <div class="card-header">
-                        <h4>お知らせ</h4>
+                {% if news is not null %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>お知らせ</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ include('news/_list.html.twig') }}
+                            {% block news %}{% endblock %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {{ include('news/_list.html.twig') }}
-                        {% block news %}{% endblock %}
-                    </div>
-                </div>
+                {% endif %}
             </div>
             <div class="col-lg-6 col-md-6 col-12 pl-md-4 pl-0 pr-0">
                 {{ render(controller("ChapterThree\\C3Bundle\\Controller\\MenuController::button", {'page':app.request.requestUri})) }}
