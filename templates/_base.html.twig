@@ -226,11 +226,11 @@
                             <i class="fas fa-cog"></i> 設定
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="/logout" class="dropdown-item has-icon text-danger">
+                        <a href="{{ path("app_logout") }}" class="dropdown-item has-icon text-danger">
                             <i class="fas fa-sign-out-alt"></i> ログアウト
                         </a>
                         {% else %}
-                        <a href="/login" class="dropdown-item has-icon text-primary">
+                        <a href="{{ path("app_login") }}" class="dropdown-item has-icon text-primary">
                             <i class="fas fa-sign-in-alt"></i> ログイン
                         </a>
                         {% endif %}
