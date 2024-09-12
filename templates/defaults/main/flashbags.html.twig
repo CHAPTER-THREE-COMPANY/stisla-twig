@@ -1,4 +1,4 @@
-{% for label, messages in app.session.flashBag.all %}
+{% for label, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert alert-{{label}} alert-dismissible alert-has-icon show fade">
             <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
