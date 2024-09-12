@@ -2,17 +2,34 @@
 
 namespace ChapterThree\C3Bundle\Twig;
 
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+    public function __construct(
+        private RouterInterface $router
+    )
+    {
+    }
+
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('is_method_exists', [$this, 'isMethodExists'])
+            new TwigFunction('is_method_exists', [$this, 'isMethodExists']),
+            new TwigFunction('getRouterExistUrl', [$this, 'getRouterExistUrl']),
         ];
+    }
+
+    public function getRouterExistUrl($route, $url): string
+    {
+        if (array_key_exists($route, $this->router->getRouteCollection()->all())) {
+            return $this->router->generate($route);
+        }else{
+            return $url;
+        }
     }
 
     public function isMethodExists($object, $method)
