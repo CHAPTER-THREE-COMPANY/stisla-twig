@@ -71,7 +71,3 @@ require('./custom');
 //
 
 require('../css/custom.css');
-
-$('.js-datepicker').datepicker({
-    language:'ja'
-});
