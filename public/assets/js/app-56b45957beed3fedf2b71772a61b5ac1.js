@@ -53,7 +53,7 @@ require('summernote/dist/lang/summernote-ja-JP.js');
 require('fullcalendar/dist/fullcalendar');
 require('fullcalendar/dist/locale-all');
 
-require('stisla-dev/assets/js/stisla');
+//require('stisla-dev/assets/js/stisla');
 //require('stisla-dev/assets/js/scripts');
 require('./scripts');
 require('./custom');
@@ -71,7 +71,3 @@ require('./custom');
 //
 
 require('../css/custom.css');
-
-$('.js-datepicker').datepicker({
-    language:'ja'
-});
