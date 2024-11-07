@@ -40,15 +40,15 @@ class DefaultController extends AbstractController
                           UserRepository $userRepository,
                           NotifierInterface $notifier,
                           ChatterInterface $chatter
-    )
+    ): Response
     {
         // replace this example code with whatever you need
         /*if (($this->getUser()->getUsername() == "admin@chapter-three.jp")){
             $this->addFlash("warning","<a href='https://www.google.co.jp'>お知らせイング</a>" );
         }*/
 
-        $message = $this->getParameter('adminEmail');
-        $message = $request->query->get('entity');
+        //$message = $this->getParameter('adminEmail');
+        //$message = $request->query->get('entity');
         //echo "<pre>{$message}</pre>";
 
         if ($this->isGranted('ROLE_USER')) {
@@ -57,22 +57,22 @@ class DefaultController extends AbstractController
             }
 
             return $this->render('defaults/main/index.html.twig'
-                ,array(
+                , [
                     'news' => null, //$newsRepository->findNews(),
                     //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
                     'body'=>true,
-                )
+                ]
             );
         }else{
             if ($this->getUser()->getFullname() == ""){
                 return $this->forward("App\Controller\Defaults\DefaultController::profile");
             }else{
                 return $this->render('defaults/main/none.html.twig'
-                    ,array(
+                    ,[
                         'news' => "必要な登録は完了いたしました。<br>メンバーに承認されるまで、今しばらくお待ちください。",
                         //'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
                         'body'=>true,
-                    )
+                    ]
                 );
             }
         }
@@ -116,7 +116,7 @@ class DefaultController extends AbstractController
     {
         $repo_key = $request->get('repo_key');
         if(!empty($request->get('code'))) {
-            $keyword = urldecode(trim($request->get('code')));
+            //$keyword = urldecode(trim($request->get('code')));
             $keyword = $request->get('code');
             $code = (string)$request->getContent();
             $code = str_replace("code=","", $code);
@@ -225,17 +225,17 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/memo', name: 'memo')]
-    public function memoAction(Request $request, EntityManagerInterface $entityManager)
+    public function memoAction(Request $request, EntityManagerInterface $entityManager): RedirectResponse|Response
     {
         $entiry = new \App\Entity\Sample\Task();
-        $form = $this->createForm( str_replace('Entity', 'Form', ''.get_class($entiry)."Type"), $entiry);
+        $form = $this->createForm( str_replace('Entity', 'Form', get_class($entiry)."Type"), $entiry);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($entiry);
             $entityManager->flush();
 
-            return $this->redirectToRoute('memo');
+            return $this->redirectToRoute('app_memo');
         }
 
 
@@ -249,7 +249,7 @@ class DefaultController extends AbstractController
      * @param $page
      * @return RedirectResponse|Response
      */
-    #[Route('/demo/{page}', name: 'etc', defaults: ['page'=>'index.html'], requirements: ['page'=>'^(?!task|orders).+'])]
+    #[Route('/demo/{page}', name: 'etc', requirements: ['page'=>'^(?!task|orders).+'], defaults: ['page'=>'index.html'])]
     public function etcAction($page): RedirectResponse|Response
     {
         if (in_array(substr($page,0,4) ,['task','orde'])){
