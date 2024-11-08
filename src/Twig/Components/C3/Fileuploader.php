@@ -2,9 +2,10 @@
 
 namespace ChapterThree\C3Bundle\Twig\Components\C3;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Symfony\Component\Form\FormView;
 
 #[AsTwigComponent]
-class Vue2
+class Fileuploader
 {
-//    public string $title;
+    public FormView $form;
 }
