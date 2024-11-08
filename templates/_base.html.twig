@@ -216,7 +216,7 @@
                         <div class="dropdown-title">最終ログイン</div>
                         <div class="dropdown-title">{% if app.user.LastLoginDate is defined %}{{ app.user.LastLoginDate|date("Y/m/d H:m:s") }}{% endif %}</div>
                         <div class="dropdown-title"></div>
-                        <a href="/profile" class="dropdown-item has-icon">
+                        <a href="{{ getRouterExistUrl("app_profile", "./profile") }}" class="dropdown-item has-icon">
                             <i class="far fa-user"></i> プロフィール
                         </a>
                         <a href="features-activities.html" class="dropdown-item has-icon">
