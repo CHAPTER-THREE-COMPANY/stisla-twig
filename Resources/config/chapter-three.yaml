@@ -71,3 +71,8 @@ monolog:
       level:       debug
       include_extra: true
       channels:    ['info']
+
+services:
+  App\Service\FileUploader:
+    arguments:
+      $targetDirectory: '%images_directory%'
