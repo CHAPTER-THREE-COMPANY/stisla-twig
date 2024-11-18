@@ -73,6 +73,6 @@ monolog:
       channels:    ['info']
 
 services:
-  ChapterThree\C3Bundle\Service\FileUploader:
-    arguments:
-      $targetDirectory: '%images_directory%'
+#  ChapterThree\C3Bundle\Service\FileUploader:
+#    arguments:
+#      $targetDirectory: '%images_directory%'
