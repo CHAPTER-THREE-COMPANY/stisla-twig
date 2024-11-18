@@ -1,16 +1,17 @@
 <?php
 namespace ChapterThree\C3Bundle\Service;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
-    private $targetDirectory;
-
-    public function __construct($targetDirectory)
+    public function __construct(
+        #[Autowire('%images_directory%')]
+        private string $targetDirectory
+    )
     {
-        $this->targetDirectory = $targetDirectory;
     }
 
     public function upload(UploadedFile $file)
