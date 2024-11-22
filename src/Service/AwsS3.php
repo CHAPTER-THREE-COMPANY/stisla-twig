@@ -6,7 +6,7 @@ namespace ChapterThree\C3Bundle\Service;
 
 use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
-use Aws\S3\S3ClientInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AwsS3
 {
@@ -73,12 +73,12 @@ class AwsS3
         exit();
     }
 
-    public function upload($file, $filename, $prefix='')
+    public function upload(UploadedFile $file, $filename, $prefix='')
     {
         try {
             $result = $this->client->putObject([
                 'Bucket' => $this->bucket,
-                'Key' => $prefix.pathinfo($filename)["basename"],
+                'Key' => $prefix.$file->getClientOriginalName(),
                 'SourceFile' => $filename,
                 'ContentType' => mime_content_type($filename)
             ]);
