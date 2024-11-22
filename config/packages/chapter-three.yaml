@@ -25,3 +25,7 @@ twig:
     version: '%env(VERSION)%'
     ga_tracking_id: '%env(GA_TRACKING_ID)%'
 
+services:
+#  ChapterThree\C3Bundle\Service\FileUploader:
+#    arguments:
+#      $targetDirectory: '%images_directory%'
