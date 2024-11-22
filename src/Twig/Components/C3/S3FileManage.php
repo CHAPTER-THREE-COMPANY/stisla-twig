@@ -27,7 +27,11 @@ class S3FileManage
             $result = $resolver->resolve($data) + $data;
         }catch (MissingOptionsException $exception){
             throw new MissingOptionsException('<twig:C3:S3FileManage> は getDataUrl="url" が必要です。 '.
-                "['name' => string,'div' => 'dir'|'file','children' => [],'url'=>string]");
+                "['name' => string,'div' => 'dir'|'file','children' => [],'url'=>string]\n".
+                "if (!\$this->isCsrfTokenValid('filemanage-get-items\', \$request->getPayload()->get(\'token\'))) {".
+                "  throw new AccessDeniedHttpException(\'CSRF token invalid. \');".
+                '} に対応してください'
+            );
         }
 
         return $result;
