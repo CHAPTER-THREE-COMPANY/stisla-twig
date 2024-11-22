@@ -2,7 +2,7 @@
     <div class="p-3">
         <div id="app" class="section">
             {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
-                <twig:C3:Fileuploader form="{{ form }}"/>
+                <twig:C3:Fileuploader form="{{ form }}" savePath:attr:v-model="selectFile" />
             {% endif %}
 
             <div class="section-body">
