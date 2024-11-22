@@ -2,7 +2,7 @@
     <div class="p-3">
         <div id="app_vue" class="section">
             {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
-                <twig:C3:Fileuploader form="{{ form }}" savePath:attr:v-model="selectFile" />
+                <twig:C3:Fileuploader form="{{ form }}" savePath:attr:v-model="selectFile" v-on:delete="deleteObject" />
             {% endif %}
 
             <div class="section-body">
@@ -63,7 +63,7 @@
         <script>
             var app_vue = new Vue({
                 el: '#app_vue',
-                delimiter: ['{$', '}}'],
+                delimiter: ['{$', '$}'],
                 vuetify: new Vuetify(),
                 data: () => ({
                     items: [],
