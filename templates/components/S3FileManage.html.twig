@@ -28,9 +28,9 @@
                                         open-all
                                         open-on-click
                                         {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
-                                        selectable
-                                        selection-type="independent"
-                                        return-object
+                                            selectable
+                                            selection-type="independent"
+                                            return-object
                                         {% endif %}
                                         :items="items"
                                         :search="search"
@@ -91,12 +91,17 @@
                     document.querySelector(".section-body > .card").style.opacity = '20%'
                     const self = this;
                     axios
-                        .get("{{ getDataUrl }}")
+                        .post("{{ getDataUrl }}", {"token":"{{ csrf_token('filemanage-get-items') }}"})
                         .then(function (res) {
                             self.items = res.data;
                             document.getElementById("app_vue").style.cursor = 'default'
                             document.querySelector(".section-body > .card").style.opacity = '100%'
-                        });
+                        })
+                        .catch(function (res) {
+                            console.log(res)
+                            alert(res.message)
+                        })
+                    ;
                 },
                 computed: {//computed:何か動きがあった場合、計算された値を返す？
                     validation: function () {//計算が必要な処理の紐付け？
