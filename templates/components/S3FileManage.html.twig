@@ -24,7 +24,7 @@
                             <v-card-text>
                                 <v-treeview
                                         v-model="tree"
-                                        item-key="name"
+                                        item-key="key"
                                         open-all
                                         open-on-click
                                         {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
@@ -36,13 +36,14 @@
                                         :search="search"
                                 >
                                     <template v-slot:label="{ item, open }">
-
                                         <v-icon
-                                            v-if="item.children" v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
+                                                v-if="item.children"
+                                                v-text="open ? 'mdi-folder-open' : 'mdi-folder'"
                                         >
                                         </v-icon>
                                         <v-icon
-                                            v-else v-text="files[item.file] ? `${files[item.file]}` : 'mdi-file-outline'">
+                                                v-else
+                                                v-text="files[item.file] ? `${files[item.file]}` : 'mdi-file-outline'">
                                         </v-icon>
 
                                         <a v-bind:href="item.url" v-if="!item.children"><span v-text="item.name"></span></a>
@@ -87,21 +88,7 @@
                     },
                 }),
                 mounted: function ()  {
-                    document.getElementById("app_vue").style.cursor = 'wait'
-                    document.querySelector(".section-body > .card").style.opacity = '20%'
-                    const self = this;
-                    axios
-                        .post("{{ getDataUrl }}", {"token":"{{ csrf_token('fileManage-get-items') }}"})
-                        .then(function (res) {
-                            self.items = res.data;
-                            document.getElementById("app_vue").style.cursor = 'default'
-                            document.querySelector(".section-body > .card").style.opacity = '100%'
-                        })
-                        .catch(function (res) {
-                            console.log(res)
-                            alert(res.message)
-                        })
-                    ;
+                    this.getAllObjects()
                 },
                 computed: {//computed:何か動きがあった場合、計算された値を返す？
                     validation: function () {//計算が必要な処理の紐付け？
@@ -126,6 +113,41 @@
                         }
                         return ret;
                     },
+                },
+                methods: {
+                    getAllObjects: function () {
+                        document.getElementById("app_vue").style.cursor = 'wait'
+                        document.querySelector(".section-body > .card").style.opacity = '20%'
+                        const self = this;
+                        axios
+                            .post("{{ getDataUrl }}", {"token":"{{ csrf_token('fileManage-get-items') }}"})
+                            .then(function (res) {
+                                self.items = res.data;
+                                document.getElementById("app_vue").style.cursor = 'default'
+                                document.querySelector(".section-body > .card").style.opacity = '100%'
+                            })
+                            .catch(function (res) {
+                                console.log(res)
+                                alert(res.message)
+                            })
+                        ;
+                    },
+                    deleteObject: function (event) {
+                        this.tree.forEach(function(node) {
+                            let that =this;
+                            axios
+                                .post("{{ path("aws_s3_delete") }}", {"key": node.key, "token":"{{ csrf_token('fileManage-delete-items') }}"})
+                                .then((res)=> {
+                                    console.log(res.data)
+                                    app_vue.getAllObjects()
+                                })
+                                .catch(function (res) {
+                                    console.log(res)
+                                })
+                            ;
+                        })
+
+                    }
                 }
             });
         </script>

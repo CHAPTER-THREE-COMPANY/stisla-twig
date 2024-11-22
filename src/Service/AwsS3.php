@@ -61,6 +61,19 @@ class AwsS3
         return $result;
     }
 
+    public function deleteObject($params)
+    {
+        if (empty($params['Bucket'])) {
+            $params['Bucket'] = $this->bucket;
+        }
+        try {
+            $result = $this->client->deleteObject($params);
+        }catch (\Exception $exception){
+            throw $exception;
+        }
+        return $result;
+    }
+
     public function download($filename) : \Symfony\Component\HttpFoundation\Response
     {
         $key = "s3://".$this->bucket."/".$filename;
@@ -86,6 +99,11 @@ class AwsS3
             dump($e);
         }
         return $result;
+    }
+
+    public function delete($key)
+    {
+        return $this->deleteObject(['Bucket' => $this->bucket, 'Key' => $key]);
     }
 
 }
