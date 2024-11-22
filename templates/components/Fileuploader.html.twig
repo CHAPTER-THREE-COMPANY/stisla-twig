@@ -5,9 +5,11 @@
 <div{{ attributes }}>
     <div class="card">
         <div class="card-body">
+            {{ form_start(form) }}
             {{ form_row(form.savePath, savePathAttr) }}
             {{ form_row(form.filename, {'attr': {'class': 'form-control'}}) }}
             <button class="btn btn-primary">{{ button_label|default('保存') }}</button>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>
