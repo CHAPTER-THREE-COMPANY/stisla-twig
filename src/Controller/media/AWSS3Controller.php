@@ -1,6 +1,6 @@
 <?php
 
-namespace ChapterThree\C3Bundle\Controller\Media;
+namespace ChapterThree\C3Bundle\Controller\media;
 
 use ChapterThree\C3Bundle\Form\FileuploadType;
 use ChapterThree\C3Bundle\Service\FileUploader;
