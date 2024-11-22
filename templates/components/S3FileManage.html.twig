@@ -91,7 +91,7 @@
                     document.querySelector(".section-body > .card").style.opacity = '20%'
                     const self = this;
                     axios
-                        .get("{{ path('aws_s3_data') }}")
+                        .get("{{ getDataUrl }}")
                         .then(function (res) {
 
                             self.items = res.data;
