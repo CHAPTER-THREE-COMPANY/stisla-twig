@@ -1,7 +1,7 @@
 <twig:C3:Vue2>
     <div class="p-3">
         <div id="app" class="section">
-            {% if fileUploadFlag %}
+            {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
                 <twig:C3:Fileuploader form="{{ form }}"/>
             {% endif %}
 
@@ -27,8 +27,10 @@
                                         item-key="name"
                                         open-all
                                         open-on-click
+                                        {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
                                         selectable
                                         return-object
+                                        {% endif %}
                                         :items="items"
                                         :search="search"
                                 >
