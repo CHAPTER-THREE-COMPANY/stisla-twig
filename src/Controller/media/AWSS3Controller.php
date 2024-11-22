@@ -1,7 +1,8 @@
 <?php
 
-namespace ChapterThree\C3Bundle\Controller\media;
+namespace ChapterThree\C3Bundle\Controller\Media;
 
+use App\Entity\Fileupload;
 use ChapterThree\C3Bundle\Form\FileuploadType;
 use ChapterThree\C3Bundle\Service\AwsS3;
 use ChapterThree\C3Bundle\Service\FileUploader;
@@ -49,7 +50,8 @@ class AWSS3Controller extends AbstractController
             return $this->redirectToRoute('aws_s3');
         }
 
-        return $this->render('@C3/media/aws_s3/index.html.twig', [
+        return $this->render('media/aws_s3/index.html.twig', [
+            //'data' => $objects,
             'data' => [],
             'form' => $form,
         ]);
@@ -102,6 +104,7 @@ class AWSS3Controller extends AbstractController
             if (mb_strpos($file, '/') === false) {
                 $files[] = [
                     $file,
+                    'key' => $object['Key'],
                     'name' => $file,
                     'file' => mb_strtolower(mb_substr($file, mb_strpos($file, '.')+1)),
                     'url' => urldecode($this->generateUrl('aws_s3_download').'?filename='.$object['Key'])
@@ -110,6 +113,7 @@ class AWSS3Controller extends AbstractController
                 $dir1 = mb_substr($file, 0, mb_strpos($file, '/'));
                 if (mb_strpos($file, '/')+1 == mb_strlen($file)){
                     $files[] = [
+                        'key' => $object['Key'],
                         'name' => $dir1,
                         'div' => 'dir',
                         'children' => [],
@@ -135,6 +139,23 @@ class AWSS3Controller extends AbstractController
         }
 
         return new JsonResponse($files);
+    }
+
+    #[Route('/aws/s3/delete', name: 'aws_s3_delete', methods: ['POST', 'GET'])]
+    public function delete(Request $request) : jsonResponse
+    {
+        // CSRF Check 他のサイトからの不正アクセスを防ぐ
+        if (!$this->isCsrfTokenValid('fileManage-delete-items', $request->getPayload()->get('token'))) {
+            throw new AccessDeniedHttpException('CSRF token invalid. ');
+        }
+
+        try {
+            $result = $this->s3->delete($request->getPayload()->get('key'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        return new JsonResponse($result);
     }
 
     #[NoReturn] #[Route('/aws/s3/download', name: 'aws_s3_download')]
