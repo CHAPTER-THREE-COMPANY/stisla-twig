@@ -1,6 +1,6 @@
 <?php
 
-namespace ChapterThree\C3Bundle\Controller\media;
+namespace ChapterThree\C3Bundle\Controller\Media;
 
 use App\Entity\Fileupload;
 use ChapterThree\C3Bundle\Form\FileuploadType;
