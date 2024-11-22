@@ -48,7 +48,7 @@ class AWSS3Controller extends AbstractController
             return $this->redirectToRoute('aws_s3');
         }
 
-        return $this->render('media/aws_s3/index.html.twig', [
+        return $this->render('@C3/media/aws_s3/index.html.twig', [
             'data' => [],
             'form' => $form,
         ]);
