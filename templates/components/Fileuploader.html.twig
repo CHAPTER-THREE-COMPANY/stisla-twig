@@ -9,7 +9,7 @@
             {{ form_row(form.savePath, savePathAttr) }}
             {{ form_row(form.filename, {'attr': {'class': 'form-control'}}) }}
             <button class="btn btn-primary">{{ button_label|default('保存') }}</button>
-            <a class="btn btn-danger" @click="deleteObject">削除</a>
+            <a class="btn btn-danger text-white" @click="deleteObject">削除</a>
             {{ form_end(form) }}
         </div>
     </div>
