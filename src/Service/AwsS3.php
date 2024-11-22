@@ -13,7 +13,7 @@ class AwsS3
     public $client;
     public $bucket;
 
-    public function __construct(S3ClientInterface $s3Client)
+    public function __construct(S3Client $s3Client)
     {
         $this->client = $s3Client;
         // Amazon S3 ストリームラッパーを登録

@@ -3,6 +3,7 @@
 namespace ChapterThree\C3Bundle\Controller\media;
 
 use ChapterThree\C3Bundle\Form\FileuploadType;
+use ChapterThree\C3Bundle\Service\AwsS3;
 use ChapterThree\C3Bundle\Service\FileUploader;
 use JetBrains\PhpStorm\NoReturn;
 use Psr\Log\LoggerInterface;
