@@ -4,6 +4,7 @@
 namespace ChapterThree\C3Bundle\Service;
 
 
+use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
 
 class AwsS3
@@ -17,7 +18,7 @@ class AwsS3
         // Amazon S3 ストリームラッパーを登録
         $this->client->registerStreamWrapper();
 
-        $this->bucket = 's3-symfony';
+        $this->bucket = 'wp-sakaecho-files';
     }
 
     public function listBuckets()
@@ -45,6 +46,7 @@ class AwsS3
         }
         return $result;
     }
+
     public function putObject($params)
     {
         if (empty($params['Bucket'])) {
@@ -70,5 +72,19 @@ class AwsS3
         exit();
     }
 
+    public function upload($file, $filename, $prefix='')
+    {
+        try {
+            $result = $this->client->putObject([
+                'Bucket' => $this->bucket,
+                'Key' => $prefix.pathinfo($filename)["basename"],
+                'SourceFile' => $filename,
+                'ContentType' => mime_content_type($filename)
+            ]);
+        } catch (AwsException $e) {
+            dump($e);
+        }
+        return $result;
+    }
 
 }

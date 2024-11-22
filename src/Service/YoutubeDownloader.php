@@ -3,9 +3,9 @@
 
 namespace ChapterThree\C3Bundle\Service;
 
-use App\Service\Ambigous;
-use App\Service\multitype;
-use App\Service\unknown;
+use ChapterThree\C3Bundle\Service\Ambigous;
+use ChapterThree\C3Bundle\Service\multitype;
+use ChapterThree\C3Bundle\Service\unknown;
 
 /**
  * Youtube保存用クラス
