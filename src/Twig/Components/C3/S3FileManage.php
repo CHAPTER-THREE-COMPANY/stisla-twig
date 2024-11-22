@@ -18,13 +18,13 @@ class S3FileManage
     {
         // validate data
         $resolver = new OptionsResolver();
-        $resolver->setIgnoreUndefined(true);
+        $resolver->setIgnoreUndefined(true);    // attributes の厳密検査不良
 
         $resolver->setRequired('getDataUrl');
         $resolver->setAllowedTypes('getDataUrl', 'string');
 
         try {
-            $result = $resolver->resolve($data) + $data;
+            $result = $resolver->resolve($data) + $data;    // attributes厳密検査不良 対策
         }catch (MissingOptionsException $exception){
             throw new MissingOptionsException('<twig:C3:S3FileManage> は getDataUrl="url" が必要です。 '.
                 "['name' => string,'div' => 'dir'|'file','children' => [],'url'=>string]\n".
