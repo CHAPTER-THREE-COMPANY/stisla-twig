@@ -26,7 +26,7 @@ class FileUploader
             // ... handle exception if something happens during file upload
         }
 
-        return $fileName;
+        return $this->targetDirectory."/".$fileName;
     }
 
     public function getTargetDirectory()
