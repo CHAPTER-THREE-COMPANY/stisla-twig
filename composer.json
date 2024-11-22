@@ -20,6 +20,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "ext-fileinfo": "*",
         "aws/aws-sdk-php": "^3.329",
         "aws/aws-sdk-php-symfony": "^2.7",
         "doctrine/dbal": "^3",
