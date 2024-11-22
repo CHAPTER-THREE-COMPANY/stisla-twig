@@ -1,6 +1,6 @@
 <twig:C3:Vue2>
     <div class="p-3">
-        <div id="app" class="section">
+        <div id="app_vue" class="section">
             {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
                 <twig:C3:Fileuploader form="{{ form }}" savePath:attr:v-model="selectFile" />
             {% endif %}
@@ -29,6 +29,7 @@
                                         open-on-click
                                         {% if fileUploadFlag is same as "true" or fileUploadFlag is same as true %}
                                         selectable
+                                        selection-type="independent"
                                         return-object
                                         {% endif %}
                                         :items="items"
@@ -60,8 +61,8 @@
 
     <twig:block name="script">
         <script>
-            var app = new Vue({
-                el: '#app',
+            var app_vue = new Vue({
+                el: '#app_vue',
                 delimiter: ['{$', '}}'],
                 vuetify: new Vuetify(),
                 data: () => ({
@@ -86,7 +87,7 @@
                     },
                 }),
                 mounted: function ()  {
-                    document.getElementById("app").style.cursor = 'wait'
+                    document.getElementById("app_vue").style.cursor = 'wait'
                     document.querySelector(".section-body > .card").style.opacity = '20%'
                     const self = this;
                     axios
@@ -94,7 +95,7 @@
                         .then(function (res) {
 
                             self.items = res.data;
-                            document.getElementById("app").style.cursor = 'default'
+                            document.getElementById("app_vue").style.cursor = 'default'
                             document.querySelector(".section-body > .card").style.opacity = '100%'
                         });
                 },
