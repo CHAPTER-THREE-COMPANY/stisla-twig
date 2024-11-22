@@ -91,7 +91,7 @@
                     document.querySelector(".section-body > .card").style.opacity = '20%'
                     const self = this;
                     axios
-                        .post("{{ getDataUrl }}", {"token":"{{ csrf_token('filemanage-get-items') }}"})
+                        .post("{{ getDataUrl }}", {"token":"{{ csrf_token('fileManage-get-items') }}"})
                         .then(function (res) {
                             self.items = res.data;
                             document.getElementById("app_vue").style.cursor = 'default'

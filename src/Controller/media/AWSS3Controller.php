@@ -49,7 +49,6 @@ class AWSS3Controller extends AbstractController
         }
 
         return $this->render('media/aws_s3/index.html.twig', [
-            //'data' => $objects,
             'data' => [],
             'form' => $form,
         ]);
@@ -90,7 +89,7 @@ class AWSS3Controller extends AbstractController
     public function data(Request $request) : jsonResponse
     {
         // CSRF Check 他のサイトからの不正アクセスを防ぐ
-        if (!$this->isCsrfTokenValid('filemanage-get-items', $request->getPayload()->get('token'))) {
+        if (!$this->isCsrfTokenValid('fileManage-get-items', $request->getPayload()->get('token'))) {
             throw new AccessDeniedHttpException('CSRF token invalid. ');
         }
 
