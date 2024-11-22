@@ -2,7 +2,6 @@
 
 namespace ChapterThree\C3Bundle\Form;
 
-use App\Entity\Fileupload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -56,7 +55,6 @@ class FileuploadType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Fileupload::class,
         ]);
     }
 }
