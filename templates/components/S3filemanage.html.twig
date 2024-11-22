@@ -1,6 +1,10 @@
 <twig:Vue2>
     <div class="p-3">
         <div id="app" class="section">
+            {% if fileUploadFlag %}
+                <twig:C3:Fileuploader form="{{ form }}"/>
+            {% endif %}
+
             <div class="section-body">
                 <div class="card">
                     <v-app class="p-3">
@@ -23,6 +27,8 @@
                                         item-key="name"
                                         open-all
                                         open-on-click
+                                        selectable
+                                        return-object
                                         :items="items"
                                         :search="search"
                                 >
@@ -73,6 +79,7 @@
                         jpg: 'mdi-file-image',
                         txt: 'mdi-file-document-outline',
                         xls: 'mdi-file-excel',
+                        svg: 'mdi-file-outline'
                     },
                 }),
                 mounted: function ()  {
@@ -88,6 +95,26 @@
                             document.querySelector(".section-body > .card").style.opacity = '100%'
                         });
                 },
+                computed: {//computed:何か動きがあった場合、計算された値を返す？
+                    validation: function () {//計算が必要な処理の紐付け？
+                        return (this.selectFile);//selectFileプロパティを計算して返す
+                    },
+                    selectFile: function () {
+                        //最終選択値を取得してフォルダ名に加工して返す
+                        let list = this.tree;
+                        // let ret = 'files/';//初期値にfilesセット
+                        let ret = '';//初期値にfilesセット
+                        if (list.length > 0) {
+                            ret = list[list.length - 1]['url'].replace('/media/aws/s3/download?filename=', '');
+                        }
+                        let pathinfo = ret.split('/');
+                        let filename = pathinfo.pop();
+                        if (filename.indexOf('.') > 0 ) {
+                            ret = ret.replace(filename, '');
+                        }
+                        return ret;
+                    },
+                }
             });
         </script>
     </twig:block>
