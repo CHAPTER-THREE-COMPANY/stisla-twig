@@ -1,70 +1,70 @@
 <?php
 
-namespace ChapterThree\C3Bundle\Controller\media;
+namespace ChapterThree\C3Bundle\Controller\Media;
 
-use Aws\S3\Exception\S3Exception;
-use ChapterThree\C3Bundle\Service\AwsS3;
-use ChapterThree\C3Bundle\Service\Slack;
+use ChapterThree\C3Bundle\Form\FileuploadType;
+use ChapterThree\C3Bundle\Service\FileUploader;
+use JetBrains\PhpStorm\NoReturn;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Class AWSS3Controller
  * @package App\Controller\media
+ * @Route("/media")
  */
 #[Route('/media')]
 class AWSS3Controller extends AbstractController
 {
-
-    public function __construct(
-        private AwsS3 $s3,
-        private Slack $slack)
+    public function __construct(private readonly AwsS3 $s3)
     {
     }
 
     #[Route('/aws/s3', name: 'aws_s3')]
-    public function index()
+    public function index(Request $request, FileUploader $fileUploader, LoggerInterface $logger): Response
     {
-        ini_set('memory_limit', '-1');
-        
-        return $this->render('media/awss3/index.html.twig', [
-            //'data' => $objects,
-            'data' => [],
-        ]);
-    }
-    
-    private function ListAllObjects(/*$bucketPrefix, */$marker = null, $delimiter=null) {
+        ini_set('max_file_uploads', '200M');
 
-        try {
-            $result = $this->s3->getObject([
-                'Bucket' => $this->s3->bucket,
-                'Key' => 's3-symfony/filelist.json'
-            ]);
+        $fileUpload = new Fileupload();
+        $form = $this->createForm(FileuploadType::class, $fileUpload);
+        $form->handleRequest($request);
 
-            if (!empty($result['Body'])) {
-                return json_decode($result['Body'], true);
-            } else {
-                $this->slack->send('NoSuchKey!!!');
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $aFile */
+            $aFile = $form['filename']->getData();
+            if ($aFile) {
+                $tmp = $aFile;
+                $fileName = $fileUploader->upload($aFile);
+                $logger->info($fileName);
+                $this->s3->upload($tmp,$fileName,$form['savePath']->getData());
             }
-        }catch (S3Exception $exception){
-            if ($exception->getAwsErrorCode() != 'NoSuchKey'){
-                $this->slack->send("s3 exception");
-                $this->slack->send($exception);
-            }
-            // to Make FileList.Json
-        }catch (\Exception $exception){
-            $this->slack->send($exception);
+
+            return $this->redirectToRoute('aws_s3');
         }
 
+        return $this->render('media/aws_s3/index.html.twig', [
+            //'data' => $objects,
+            'data' => [],
+            'form' => $form,
+        ]);
+    }
+
+    private function ListAllObjects(/*$bucketPrefix, */$marker = null, $delimiter=null) : array
+    {
         $objects = $this->s3->ListObjects([
             'Bucket' => $this->s3->bucket,
             //'Prefix' => $bucketPrefix,
             'Marker' => $marker,
             //'Delimiter' => $delimiter
         ]);
-        
-    
+
+
         $list = array();
         if(isset($objects["Contents"])){
             // 取得したファイルのリストを$list配列に追加していく。
@@ -83,19 +83,21 @@ class AWSS3Controller extends AbstractController
             }
         }
 
-        $this->s3->putObject([
-            'Key' => 's3-symfony/filelist.json',
-            'Body' => json_encode($list)
-        ]);
-    
         return $list;
     }
 
-    #[Route('/aws/s3/data', name: 'aws_s3_data')]
-    public function data()
+    #[Route('/aws/s3/data', name: 'aws_s3_data', methods: ['POST'])]
+    public function data(Request $request) : jsonResponse
     {
+        // CSRF Check 他のサイトからの不正アクセスを防ぐ
+        if (!$this->isCsrfTokenValid('filemanage-get-items', $request->getPayload()->get('token'))) {
+            throw new AccessDeniedHttpException('CSRF token invalid. ');
+        }
+
+        //$objects = $this->s3->listObjects();
+        //$objects = $objects->toArray()['Contents'];
         $objects = $this->ListAllObjects();
-    
+
         $makeFileArray = function ($files, $file, $object) use (&$makeFileArray) {
             if (mb_strpos($file, '/') === false) {
                 $files[] = [
@@ -111,12 +113,15 @@ class AWSS3Controller extends AbstractController
                         'name' => $dir1,
                         'div' => 'dir',
                         'children' => [],
+                        'url' => urldecode($this->generateUrl('aws_s3_download').'?filename='.$object['Key'])
                     ];
                 }else{
                     $file1 = mb_substr($file, mb_strpos($file, '/')+1);
                     foreach ($files as $key => $tmp){
                         if ($tmp['name'] == mb_substr($file, 0, mb_strpos($file, '/'))){
-                            if (!isset($files[$key]['children'])) $files[$key]['children'] =[];
+//                            if (!isset($files[$key]['children'])) $files[$key]['children'] =[];
+//                            $files[$key]['children'] = $makeFileArray($files[$key]['children'], $file1, $object);
+                            if (!isset($tmp['children'])) $files[$key]['children'] =[];
                             $files[$key]['children'] = $makeFileArray($files[$key]['children'], $file1, $object);
                         }
                     }
@@ -132,13 +137,13 @@ class AWSS3Controller extends AbstractController
         return new JsonResponse($files);
     }
 
-    #[Route('/aws/s3/download', name: 'aws_s3_download')]
-    public function download(\Symfony\Component\HttpFoundation\Request $request)
+    #[NoReturn] #[Route('/aws/s3/download', name: 'aws_s3_download')]
+    public function download(Request $request) : void
     {
         $filename = $request->get('filename');
         $filename = urldecode($filename);
 
         $this->s3->download($filename);
-        exit;
+        exit();
     }
 }
