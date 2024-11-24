@@ -1,7 +1,7 @@
 require("../styles/c3.css")
 
 window.showDialog = showDialog;
-function showDialog(msg, title = "", okEvent = null) {
+export function showDialog(msg, title = "", okEvent = null) {
     const body = document.body;
 
     const panel = document.createElement("dialog");
