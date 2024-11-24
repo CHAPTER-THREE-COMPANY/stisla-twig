@@ -16,6 +16,8 @@ const jQuery = $
 window.$ = window.jQuery = $;*/
 import './js/stisla.js'
 
+import './js/c3';
+
 import 'popper.js'
 import 'bootstrap';
 import 'bootstrap-datepicker'
