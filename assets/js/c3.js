@@ -1,5 +1,3 @@
-require("../styles/c3.css")
-
 window.showDialog = showDialog;
 export function showDialog(msg, title = "", okEvent = null) {
     const body = document.body;
