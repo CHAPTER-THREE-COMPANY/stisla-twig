@@ -1,6 +1,6 @@
 {
     "app": {
-        "path": "\/assets\/app-5e84abd038c50c75890bcbb4f332273f.js",
+        "path": "\/assets\/app-c18003ff64f6a8b0485e5988c0146425.js",
         "type": "js"
     },
     "\/assets\/styles\/style.css": {
@@ -21,6 +21,14 @@
     },
     "\/assets\/js\/provide_jquery.js": {
         "path": "\/assets\/js\/provide_jquery-0c36aa859a44067c7dfdf7c0204b576e.js",
+        "type": "js"
+    },
+    "\/assets\/styles\/c3.css": {
+        "path": "\/assets\/styles\/c3-974933cf18a5e60c4bff7572947e7402.css",
+        "type": "css"
+    },
+    "\/assets\/js\/c3.js": {
+        "path": "\/assets\/js\/c3-04e2829d99c6ee1f084fbd39eb720de4.js",
         "type": "js"
     },
     "\/assets\/js\/scripts.js": {

@@ -8,6 +8,8 @@
     "\/assets\/styles\/components.css",
     "\/assets\/styles\/custom.css",
     "\/assets\/js\/stisla.js",
+    "\/assets\/styles\/c3.css",
+    "\/assets\/js\/c3.js",
     "popper.js",
     "bootstrap",
     "bootstrap-datepicker",
