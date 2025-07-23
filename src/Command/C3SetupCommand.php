@@ -175,6 +175,7 @@ class C3SetupCommand extends Command
         $io->writeln("symfony composer require symfonycasts/verify-email-bundle");
         $io->writeln("symfony console make:registration-form");
         $io->writeln("config/packages/messenger.yaml sync設定(3カ所)");
+        $io->writeln("symfony composer require symfony/slack-notifier");
         $io->writeln("symfony console make:migration");
         $io->writeln("symfony console doctrine:migrations:migrate");
 
