@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ユーザー承認{% endblock %}
+
+{% block body %}
+    <h1>ユーザー 未承認一覧</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>メールアドレス</th>
+                <th>メール確認</th>
+                <th>権限</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.isVerified ? '確認済み' : '未確認' }}</td>
+                <td>{{ user.roles ? user.roles|json_encode|replace({'ROLE_USER':'ユーザー','ROLE_NORMAL':'通常ユーザー'}) : '' }}</td>
+                <td>
+                    <a href="{{ path('app_user_setuser', {'id': user.id}) }}">{{ "認証" }}</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{ "edit"|trans }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">{{ "no records found"|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}">{{ "Create new"|trans }}</a>
+{% endblock %}

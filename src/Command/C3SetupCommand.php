@@ -179,6 +179,22 @@ class C3SetupCommand extends Command
         $io->writeln("symfony console make:migration");
         $io->writeln("symfony console doctrine:migrations:migrate");
 
+        $io->writeln('');
+
+        $io->writeln('UserRepository Function 追加');
+        $io->writeln('');
+        $io->writeln("public function findByNoneRoleUsers()");
+        $io->writeln("{");
+        $io->writeln("    return $this->createQueryBuilder('u')");
+        $io->writeln("        ->where('u.roles IS NULL')");
+        $io->writeln("        ->orwhere('u.roles = :role')");
+        $io->writeln("        ->setParameter('role', '[]')");
+        $io->writeln("        ->getQuery()");
+        $io->writeln("        ->getResult();");
+        $io->writeln("}");
+
+        $io->writeln('');
+
         $io->ask("ToDo");
         $io->text("config/packages/security.yaml でアクセス制限");
         $io->text("3つのControllerをSecurityフォルダに移行");
