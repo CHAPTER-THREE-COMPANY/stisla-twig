@@ -52,7 +52,7 @@ class DefaultController extends AbstractController
         //echo "<pre>{$message}</pre>";
 
         if ($this->isGranted('ROLE_USER')) {
-            if ($userRepository->findByNoneRoleUsers()){
+            if ($userRepository->findByNoneRoleUsers()) {
                 $this->addFlash('warning', '<a href="'.$this->generateUrl("app_user_index").'">承認が必要なユーザーがいます。<br />クリックして承認してください</a>');
             }
 
