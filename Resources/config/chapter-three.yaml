@@ -20,6 +20,8 @@ parameters:
 twig:
   paths:
   #'%kernel.project_dir%/vendor/symfony/web-profiler-bundle/Resources/views/Profiler': 'c3'
+    '%kernel.project_dir%/public/node_modules/stisla-dev': ~
+    '%kernel.project_dir%/public/node_modules/stisla-dev/pages': ~
 
   globals:
     menu_long: '%env(MENU_LONG)%'
