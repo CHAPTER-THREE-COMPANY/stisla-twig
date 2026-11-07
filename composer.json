@@ -40,7 +40,7 @@
         "symfony/runtime": "7.4.*",
         "symfony/slack-notifier": "7.4.*",
         "symfony/twig-bundle": "7.4.*",
-        "symfony/ux-twig-component": "^2.17",
+        "symfony/ux-twig-component": "^2.17 || ^3.0",
         "symfony/yaml": "7.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/string-extra": "^3.10",
