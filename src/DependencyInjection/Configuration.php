@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->arrayNode('defaults')->defaultTrue()->end()
+            ->arrayNode('c3_defaults')->defaultTrue()->end()
 #            ->scalarNode('file')->defaultValue('')->end()
 #            ->scalarNode('alias')->defaultValue('')->end()
 #            ->scalarNode('app_id')->defaultValue('')->end()
